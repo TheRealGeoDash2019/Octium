@@ -1,15 +1,14 @@
 <div align="center">
-<img height="150px" src="https://raw.githubusercontent.com/Cobalt-Web/Cobalt/main/src/assets/logo.svg">
-<h1>Cobalt</h1>
+<img height="150px" src="https://raw.githubusercontent.com/TheRealGeoDash2019/Octium/main/src/assets/logo.svg">
+<h1>Octium, based on Cobalt</h1>
 <h3>A new minimal yet powerful proxy site, built for both users and developers.</h3>
-<p>View the censored web like never before with this new web proxy service made in React supporting many sites. Third place winner for <a href="https://github.com/titaniumnetwork-dev">TN</a>'s 2023 Proxathon.</p>
 </div>
 
 <p align="center">
-<a href="https://repl.it/github/Cobalt-Web/Cobalt"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/replit2.svg"><img></a>
-<a href="https://glitch.com/edit/#!/import/github/Cobalt-Web/Cobalt"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/glitch2.svg"><img></a>
-<a href="https://railway.app/new/template?template=https://github.com/Cobalt-Web/Cobalt"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/railway2.svg"><img></a>
-<a href="https://app.koyeb.com/deploy?type=git&repository=github.com/Cobalt-Web/Cobalt&branch=main&name=Cobalt"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/koyeb2.svg"><img></a>
+<a href="https://repl.it/github/TheRealGeoDash2019/Octium"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/replit2.svg"><img></a>
+<a href="https://glitch.com/edit/#!/import/github/TheRealGeoDash2019/Octium"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/glitch2.svg"><img></a>
+<a href="https://railway.app/new/template?template=https://github.com/TheRealGeoDash2019/Octium"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/railway2.svg"><img></a>
+<a href="https://app.koyeb.com/deploy?type=git&repository=github.com/TheRealGeoDash2019/Octium&branch=main&name=Octium"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/koyeb2.svg"><img></a>
 </p>
 
 ## Features
@@ -24,7 +23,7 @@
 ## Setup
 **Run**
 
-Run `npm start` to start a webserver and the Bare server. You may deploy Cobalt by using an external bare server and a static file host. Cobalt must be built before attempting to start.
+Run `npm start` to start a webserver and the Bare server. You may deploy Octium by using an external bare server and a static file host. Octium must be built before attempting to start.
 
 **Build**
 
@@ -36,38 +35,38 @@ Run `npm run dev` to run the app in development mode.
 
 **Deploy**
 
-Click a button at the top of this page and follow the directions for an easy way to host Cobalt.
+Click a button at the top of this page and follow the directions for an easy way to host Octium.
 
 ## Configuration
 
 **Obfuscation**
 
-File: [/src/consts.js](https://github.com/Cobalt-Web/Cobalt/blob/main/src/consts.js)
+File: [/src/consts.tsx](https://github.com/TheRealGeoDash2019/Octium/blob/main/src/consts.tsx)
 
 `const obfuscation = true | false;` - Choose to obfuscate text
 
 **Github and Discord**
 
-File: [/src/consts.js](https://github.com/Cobalt-Web/Cobalt/blob/main/src/consts.js)
+File: [/src/consts.tsx](https://github.com/TheRealGeoDash2019/Octium/blob/main/src/consts.tsx)
 
 `const github = "string";` - Update the Github links
 
 `const discord = "string";` - Update the Discord link
 
+**JS and Internal Namespace**
+
+File: [/src/consts.tsx](https://github.com/TheRealGeoDash2019/Octium/blob/main/src/consts.tsx)
+
+`const jsNamespace = "string";` - Change the Bundle Namepsace (eg. "MyNamespace" = window.MyNamespace[...])
+`const internalNamespace = "string";` - Change the Internal URL namespace (eg. "myepicnamespace" = myepicnamespace://home)
+
 **Bare Server**
 
-File: [/public/uv/uv.config.js](https://github.com/Cobalt-Web/Cobalt/blob/main/public/uv/uv.config.js)
+File: [/public/uv/uv.config.js](https://github.com/TheRealGeoDash2019/Octium/blob/main/public/uv/uv.config.js)
 
 `bare: url,` - Ultraviolet bare server
 
-## Goal
-My goal for Cobalt was to make a proxy site this was very simple and easy to use, with only a side panel insted of pages, which you could access on any site. Along with having it be simple and easy to use, I also wanted it to have many configuration options and an extension system where the community could build amazing tools to help you better use the web.
-
-I will continue to work on Cobalt, and hopefully I can achive everything I want in this project.
-
-Overall I think it turned out very well and if I was to choose a web proxy to use, I would choose Cobalt!
-
-## To Do
+## To Do (imported from Cobalt)
 - [ ] Reading mode extension
 - [ ] Popup for how to use Cobalt on first load
 - [ ] Keyboard shortcuts (reload, back, forward, favorite)
@@ -86,4 +85,4 @@ Overall I think it turned out very well and if I was to choose a web proxy to us
 - [ ] Games
 
 ## License
-Cobalt uses the MIT license.
+Octium uses the MIT license.

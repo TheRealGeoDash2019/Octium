@@ -6,6 +6,7 @@ import {
     useLocalCustomStyle,
     useLocalBorderRadius,
 } from "../settings";
+import { jsNamespace } from "../consts";
 
 interface HeadTypes {
     defaultTitle?: string;
@@ -30,7 +31,7 @@ function Head({ defaultTitle }: HeadTypes) {
     document.body.setAttribute("data-border-radius", localBorderRadius);
 
     React.useEffect(() => {
-        var mainTitle = defaultTitle ? defaultTitle : "Cobalt";
+        var mainTitle = defaultTitle ? defaultTitle : jsNamespace;
         var title = localTitle || mainTitle || "";
         document.title = title;
     }, [localTitle]);

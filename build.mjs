@@ -13,6 +13,7 @@ const files = [
     "internal/home.html",
     "internal/blank.html",
     "internal/viewsource.html",
+    "internal/settings.html",
     // for static file hosts
     "404.html",
 ];

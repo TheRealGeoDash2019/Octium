@@ -1,0 +1,21 @@
+body {
+    margin: 8px !important;
+}
+
+body, * {
+    font-family: serif !important;
+}
+
+a {
+    color: #9e9eff !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a:visited {
+    color: #d0adf0 !important;
+}
+
+a:active {
+    color: #ff9e9e !important;
+}

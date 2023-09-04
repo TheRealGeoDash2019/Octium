@@ -98,7 +98,7 @@ body::-webkit-scrollbar-thumb {
     height: 1.5rem;
     width: 1.5rem;
     border-radius: var(--border-radius-circle);
-    background: var(--background);
+    background: var(--primary);
     position: absolute;
     left: 0.35rem;
     top: 0.35rem;

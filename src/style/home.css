@@ -30,7 +30,7 @@
     color: var(--text-inverse);
     height: 44px;
     padding-left: 44px;
-    padding-right: 0.5rem;
+    padding-right: 44px;
     width: 584px;
     font-size: 1rem;
     max-width: 100%;
@@ -44,7 +44,7 @@
 }
 
 .homeSearchIcon {
-    background: var(--background);
+    background: transparent;
     height: calc(100% / 1.5);
     position: absolute;
     top: 7.3375px;
@@ -54,6 +54,38 @@
     justify-content: center;
     border-radius: var(--border-radius-circle);
     aspect-ratio: 1 / 1;
+}
+
+.homeSpeechInputIcon {
+    background: transparent;
+    height: calc(100% / 1.5);
+    position: absolute;
+    top: 7.3375px;
+    right: 7.3375px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-circle);
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.homeSpeechInputIcon.unavailable {
+    cursor: not-allowed;
+}
+
+.homeSpeechInputIcon.unavailable path {
+    color: #444444;
+    fill: #444444;
+}
+
+.homeSpeechInputIcon.listening {
+    background: var(--background);
+}
+
+.homeSpeechInputIcon.listening path {
+    color: #dd3333;
+    fill: #dd3333;
 }
 
 .footer {

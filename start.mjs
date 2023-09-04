@@ -58,7 +58,7 @@ httpServer.on("listening", () => {
     const address = httpServer.address();
 
     var theme = chalk.hex("#09283e");
-    console.log(`${chalk.bold(theme("Cobalt"))}`);
+    console.log(`${chalk.bold(theme("Octium"))}`);
 
     console.log(
         `  ${chalk.bold("Local:")}            http://${

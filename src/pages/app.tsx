@@ -5,11 +5,14 @@ import { ObfuscateLayout } from "../components/obfuscate";
 import "../style/index.css";
 import "../navigationBackup";
 import "../proxy";
+import { jsNamespace, internalNamespace } from "../consts";
 
 var Home = React.lazy(() => import("./home"));
 var InternalHome = React.lazy(() => import("./internal/home"));
 var InternalBlank = React.lazy(() => import("./internal/blank"));
+var InternalSettings = React.lazy(() => import("./internal/settings"));
 var InternalViewSource = React.lazy(() => import("./internal/viewsource"));
+var InternalURLS = React.lazy(() => import("./internal/internal-urls"));
 var Error = React.lazy(() => import("./error"));
 
 function App() {
@@ -34,6 +37,14 @@ function App() {
                     }
                 />
                 <Route
+                    path="/internal/settings"
+                    element={
+                        <Suspense fallback={<></>}>
+                            <InternalSettings />
+                        </Suspense>
+                    }
+                />
+                <Route
                     path="/internal/blank"
                     element={
                         <Suspense fallback={<></>}>
@@ -46,6 +57,14 @@ function App() {
                     element={
                         <Suspense fallback={<></>}>
                             <InternalViewSource />
+                        </Suspense>
+                    }
+                />
+                <Route
+                    path={`/internal/${internalNamespace}-urls`}
+                    element={
+                        <Suspense fallback={<></>}>
+                            <InternalURLS />
                         </Suspense>
                     }
                 />

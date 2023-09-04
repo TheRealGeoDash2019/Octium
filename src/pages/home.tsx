@@ -3,6 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import SearchIcon from "@mui/icons-material/Search";
+import ShieldIcon from '@mui/icons-material/Shield';
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -14,9 +15,10 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 import { ReactComponent as DockSVG } from "../assets/dock-to-left-filled.svg";
 import HomeIcon from "@mui/icons-material/Home";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import Tooltip from "@mui/material/Tooltip";
 import { BareClient } from "@tomphttp/bare-client";
 import clsx from "clsx";
-import { bareServerURL } from "../consts";
+import { bareServerURL, internalNamespace, jsNamespace, exposedInternalUrls } from "../consts";
 import { Obfuscated } from "../components/obfuscate";
 import Head from "../components/head";
 import {
@@ -33,6 +35,12 @@ import {
 import Editor from "@monaco-editor/react";
 // @ts-ignore
 import mime from "mime-types";
+import ServerLogoIcon from "../components/custom-icons/logo.js";
+
+interface SearchSuggestion {
+    internal?: boolean;
+    value: string;
+}
 
 function Home() {
     const bare = React.useMemo(() => new BareClient(bareServerURL), []);
@@ -40,12 +48,12 @@ function Home() {
     const panel = React.useRef<HTMLDivElement>(null);
     const search = React.useRef<HTMLInputElement>(null);
     const [lastURL, setLastURL] = React.useState("");
-    var homeURL = localStorage.getItem("homeURL") || "cobalt://home";
+    var homeURL = localStorage.getItem("homeURL") || `${internalNamespace}://home`;
     const [loading, setLoading] = React.useState(false);
-    const internalURLS = ["home", "blank"];
+    const internalURLS = exposedInternalUrls;
     const [canGoBack, setCanGoBack] = React.useState(false);
     const [canGoForward, setCanGoForward] = React.useState(false);
-    const [suggestions, setSuggestions] = React.useState([]);
+    const [suggestions, setSuggestions] = React.useState([] as SearchSuggestion[]);
     const [searchEngine, setSearchEngine] = React.useState(
         localStorage.getItem("engine") || "https://www.google.com/search?q=%s"
     );
@@ -94,7 +102,7 @@ function Home() {
             author: "darkreader.org",
             description:
                 "Dark mode for every website. Take care of your eyes, use dark theme for night and daily browsing.",
-            load: `setTimeout(function() {var darkreader = Cobalt.web.current.contentWindow.document.createElement("script");darkreader.src = "https://cdn.jsdelivr.net/npm/darkreader/darkreader.min.js";Cobalt.web.current.contentWindow.document.head.appendChild(darkreader);darkreader.onload = function() {Cobalt.web.current.contentWindow.DarkReader.enable()}}, 1)`,
+            load: `setTimeout(function() {var darkreader = ${jsNamespace}.web.current.contentWindow.document.createElement("script");darkreader.src = "https://cdn.jsdelivr.net/npm/darkreader/darkreader.min.js";${jsNamespace}.web.current.contentWindow.document.head.appendChild(darkreader);darkreader.onload = function() {${jsNamespace}.web.current.contentWindow.DarkReader.enable()}}, 1)`,
             id: "default-dark-mode",
             installed: false as Boolean,
         },
@@ -103,7 +111,7 @@ function Home() {
             author: "ehrenjn",
             description:
                 "Adds an extra control to Youtube video playbars that allows you to speed up videos past 2x speed (up to 16x speed).",
-            load: `Cobalt.web.current.contentWindow.addEventListener("load", () => {if (Cobalt.url.startsWith("https://www.youtube.com/watch?v=")) {(function(){function setRate(n) {Cobalt.web.current.contentWindow.document.getElementsByClassName("html5-video-container")[0].getElementsByClassName("video-stream html5-main-video")[0].playbackRate = n};function getRate() {return Cobalt.web.current.contentWindow.document.getElementsByClassName("html5-video-container")[0].getElementsByClassName("video-stream html5-main-video")[0].playbackRate};function hasVideo() {return Cobalt.web.current.contentWindow.document.getElementsByClassName("ytp-right-controls").length != 0};function injectController() {var i = Cobalt.web.current.contentWindow.document.createElement('input');i.style = "width: 30%; height: 70%; position: relative; bottom: 37%; background-Color: transparent; color: white; border-Color: transparent;";i.id = 'spdctrl';i.title = 'Playback Rate';i.style.fontSize = '100%';i.type = 'number';i.value = getRate();i.step = 0.1;i.max = 16;i.min = 0;i.onchange = function() {var s = i.value;setRate(s)};Cobalt.web.current.contentWindow.document.getElementsByTagName('video')[0].onratechange = function() {if (Cobalt.web.current.contentWindow.document.activeElement != i) {i.value = getRate()}};toolbar = Cobalt.web.current.contentWindow.document.getElementsByClassName("ytp-right-controls")[0];toolbar.prepend(i)};window.setInterval(function(){var controller = Cobalt.web.current.contentWindow.document.getElementById('spdctrl');if (controller === null && hasVideo()){injectController()}}, 300)})()}})`,
+            load: `${jsNamespace}.web.current.contentWindow.addEventListener("load", () => {if (${jsNamespace}.url.startsWith("https://www.youtube.com/watch?v=")) {(function(){function setRate(n) {${jsNamespace}.web.current.contentWindow.document.getElementsByClassName("html5-video-container")[0].getElementsByClassName("video-stream html5-main-video")[0].playbackRate = n};function getRate() {return ${jsNamespace}.web.current.contentWindow.document.getElementsByClassName("html5-video-container")[0].getElementsByClassName("video-stream html5-main-video")[0].playbackRate};function hasVideo() {return ${jsNamespace}.web.current.contentWindow.document.getElementsByClassName("ytp-right-controls").length != 0};function injectController() {var i = ${jsNamespace}.web.current.contentWindow.document.createElement('input');i.style = "width: 30%; height: 70%; position: relative; bottom: 37%; background-Color: transparent; color: white; border-Color: transparent;";i.id = 'spdctrl';i.title = 'Playback Rate';i.style.fontSize = '100%';i.type = 'number';i.value = getRate();i.step = 0.1;i.max = 16;i.min = 0;i.onchange = function() {var s = i.value;setRate(s)};${jsNamespace}.web.current.contentWindow.document.getElementsByTagName('video')[0].onratechange = function() {if (${jsNamespace}.web.current.contentWindow.document.activeElement != i) {i.value = getRate()}};toolbar = ${jsNamespace}.web.current.contentWindow.document.getElementsByClassName("ytp-right-controls")[0];toolbar.prepend(i)};window.setInterval(function(){var controller = ${jsNamespace}.web.current.contentWindow.document.getElementById('spdctrl');if (controller === null && hasVideo()){injectController()}}, 300)})()}})`,
             id: "default-yt-speed-controller",
             installed: false as Boolean,
         },
@@ -112,10 +120,10 @@ function Home() {
             author: "Nebelung",
             description: "Revert to the classic Google logo!",
             load: `setInterval(() => {
-                if (Cobalt.url.startsWith("https://www.google.com")) {
-                    var googleLogo = Cobalt.web.current.contentWindow.document.querySelector("img.lnXdpd")
-                    var googleSearchLogo = Cobalt.web.current.contentWindow.document.querySelector("img.jfN4p")
-                    var googleImagesLogo = Cobalt.web.current.contentWindow.document.querySelector(".F1hUFe, .jbTlie[aria-label='Go to Google Home']")
+                if (${jsNamespace}.url.startsWith("https://www.google.com")) {
+                    var googleLogo = ${jsNamespace}.web.current.contentWindow.document.querySelector("img.lnXdpd")
+                    var googleSearchLogo = ${jsNamespace}.web.current.contentWindow.document.querySelector("img.jfN4p")
+                    var googleImagesLogo = ${jsNamespace}.web.current.contentWindow.document.querySelector(".F1hUFe, .jbTlie[aria-label='Go to Google Home']")
                 
                     if (googleLogo) {
                         if (googleLogo.src == "https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png") {
@@ -146,10 +154,10 @@ function Home() {
             name: ":3",
             author: "Nebelung",
             description: ":3",
-            load: `Cobalt.web.current.contentWindow.setInterval(() => {
-                if (Cobalt.web.current.contentWindow.document.body) {
+            load: `${jsNamespace}.web.current.contentWindow.setInterval(() => {
+                if (${jsNamespace}.web.current.contentWindow.document.body) {
                     var e;
-                    var o = Cobalt.web.current.contentWindow.document.createTreeWalker(Cobalt.web.current.contentWindow.document.body, NodeFilter.SHOW_TEXT)
+                    var o = ${jsNamespace}.web.current.contentWindow.document.createTreeWalker(${jsNamespace}.web.current.contentWindow.document.body, NodeFilter.SHOW_TEXT)
                     for (; e = o.nextNode(); ) {
                         if (e.parentElement.nodeName !== "STYLE" && e.parentElement.nodeName !== "SCRIPT") {
                             if (e.textContent.trim() && e.textContent !== ":)") {
@@ -171,13 +179,13 @@ function Home() {
                 id: "default-youtube-downloader",
                 script: `var onYoutube = false;
 
-                Cobalt.setSidePanelBody('default-youtube-downloader', '<div class="settingsTitle">You are not on a valid youtube video.</div>')
+                ${jsNamespace}.setSidePanelBody('default-youtube-downloader', '<div class="settingsTitle">You are not on a valid youtube video.</div>')
 
                 setInterval(() => {
-                    if (Cobalt.web.current.contentWindow.ytInitialPlayerResponse) {
-                        if (Cobalt.url.startsWith("https://www.youtube.com/watch?v=")) {
+                    if (${jsNamespace}.web.current.contentWindow.ytInitialPlayerResponse) {
+                        if (${jsNamespace}.url.startsWith("https://www.youtube.com/watch?v=")) {
                             if (!onYoutube) {
-                                var downloadLinks = Cobalt.web.current.contentWindow.ytInitialPlayerResponse.streamingData.adaptiveFormats
+                                var downloadLinks = ${jsNamespace}.web.current.contentWindow.ytInitialPlayerResponse.streamingData.adaptiveFormats
                                 .map(item => {
                                     var mime = item.mimeType.split(";")[0]
                                     var quality = item.qualityLabel ? item.qualityLabel : item.audioQuality.split("AUDIO_QUALITY_")[1].toLowerCase()
@@ -192,20 +200,20 @@ function Home() {
                                         return "";
                                     }
 
-                                    return "<a class='sidePanelYoutubeDownloaderLink' download='" + Cobalt.web.current.contentWindow.ytInitialPlayerResponse.videoDetails.title.normalize() + "." + Cobalt.mime.extension(mime) + "' href='" + new URL(__uv$config.prefix + __uv$config.encodeUrl(item.url), window.location).toString() + "'>" + mime + " - " + quality + "</a>"
+                                    return "<a class='sidePanelYoutubeDownloaderLink' download='" + ${jsNamespace}.web.current.contentWindow.ytInitialPlayerResponse.videoDetails.title.normalize() + "." + ${jsNamespace}.mime.extension(mime) + "' href='" + new URL(__uv$config.prefix + __uv$config.encodeUrl(item.url), window.location).toString() + "'>" + mime + " - " + quality + "</a>"
                                 }).filter(item => item).join("")
-                                Cobalt.setSidePanelBody('default-youtube-downloader', '<div class="sidePanelYoutubeDownloader">' + downloadLinks + '</div>')
+                                ${jsNamespace}.setSidePanelBody('default-youtube-downloader', '<div class="sidePanelYoutubeDownloader">' + downloadLinks + '</div>')
                                 onYoutube = true
                             }
                         } else {
                             if (onYoutube) {
-                                Cobalt.setSidePanelBody('default-youtube-downloader', '<div class="settingsTitle">You are not on a valid youtube video.</div>')
+                                ${jsNamespace}.setSidePanelBody('default-youtube-downloader', '<div class="settingsTitle">You are not on a valid youtube video.</div>')
                                 onYoutube = false
                             }
                         }
                     } else {
                         if (onYoutube) {
-                            Cobalt.setSidePanelBody('default-youtube-downloader', '<div class="settingsTitle">You are not on a valid youtube video.</div>')
+                            ${jsNamespace}.setSidePanelBody('default-youtube-downloader', '<div class="settingsTitle">You are not on a valid youtube video.</div>')
                             onYoutube = false
                         }
                     }
@@ -367,7 +375,7 @@ function Home() {
                             ).split("/internal/viewsource?url=")[1];
                     } else {
                         var url =
-                            "cobalt://" +
+                            `${internalNamespace}://` +
                             web.current.contentWindow.location.pathname.split(
                                 "/internal/"
                             )[1];
@@ -398,14 +406,14 @@ function Home() {
                     : "";
 
                 if (
-                    url.startsWith("cobalt://") ||
+                    url.startsWith(`${internalNamespace}://`) ||
                     url.startsWith("view-source:")
                 ) {
                     favicon = "";
                 }
 
-                if (url.startsWith("cobalt://")) {
-                    title = url.split("cobalt://")[1];
+                if (url.startsWith(`${internalNamespace}://`)) {
+                    title = url.split(`${internalNamespace}://`)[1];
                     title = title.charAt(0).toUpperCase() + title.slice(1);
                 }
 
@@ -584,7 +592,7 @@ function Home() {
                 onClick={() => {
                     setLocalAppearance(theme);
                     if (
-                        currentURL.startsWith("cobalt://") ||
+                        currentURL.startsWith(`${internalNamespace}://`) ||
                         currentURL.startsWith("view-source:")
                     ) {
                         if (web.current && web.current.contentWindow) {
@@ -623,7 +631,7 @@ function Home() {
                 onClick={() => {
                     setLocalBorderRadius(name);
                     if (
-                        currentURL.startsWith("cobalt://") ||
+                        currentURL.startsWith(`${internalNamespace}://`) ||
                         currentURL.startsWith("view-source:")
                     ) {
                         if (web.current && web.current.contentWindow) {
@@ -646,8 +654,8 @@ function Home() {
 
     const SettingsComponent = () => {
         const setHomeURL = (value: string) => {
-            localStorage.setItem("homeURL", value || "cobalt://home");
-            homeURL = value || "cobalt://home";
+            localStorage.setItem("homeURL", value || `${internalNamespace}://home`);
+            homeURL = value || `${internalNamespace}://home`;
         };
 
         const setSearchEngineURL = (value: string) => {
@@ -1328,7 +1336,7 @@ function Home() {
                         ).split("/internal/viewsource?url=")[1];
                 } else {
                     var url =
-                        "cobalt://" +
+                        `${internalNamespace}://` +
                         web.current.contentWindow.location.pathname.split(
                             "/internal/"
                         )[1];
@@ -1358,12 +1366,12 @@ function Home() {
                     : ""
                 : "";
 
-            if (url.startsWith("cobalt://") || url.startsWith("view-source:")) {
+            if (url.startsWith(`${internalNamespace}://`) || url.startsWith("view-source:")) {
                 favicon = "";
             }
 
-            if (url.startsWith("cobalt://")) {
-                title = url.split("cobalt://")[1];
+            if (url.startsWith(`${internalNamespace}://`)) {
+                title = url.split(`${internalNamespace}://`)[1];
                 title = title.charAt(0).toUpperCase() + title.slice(1);
             }
 
@@ -1424,7 +1432,7 @@ function Home() {
                                         ).split("/internal/viewsource?url=")[1];
                                 } else {
                                     var url =
-                                        "cobalt://" +
+                                        `${internalNamespace}://` +
                                         web.current.contentWindow.location.pathname.split(
                                             "/internal/"
                                         )[1];
@@ -1435,7 +1443,7 @@ function Home() {
                             }
 
                             // @ts-ignore
-                            let tempHistory = Cobalt.history;
+                            let tempHistory = window[jsNamespace].history;
 
                             let checkURLHistory = tempHistory[0]
                                 ? tempHistory[0].url == url
@@ -1473,14 +1481,14 @@ function Home() {
                                         : "";
 
                                     if (
-                                        url.startsWith("cobalt://") ||
+                                        url.startsWith(`${internalNamespace}://`) ||
                                         url.startsWith("view-source:")
                                     ) {
                                         favicon = "";
                                     }
 
-                                    if (url.startsWith("cobalt://")) {
-                                        realTitle = url.split("cobalt://")[1];
+                                    if (url.startsWith(`${internalNamespace}://`)) {
+                                        realTitle = url.split(`${internalNamespace}://`)[1];
                                         realTitle =
                                             realTitle.charAt(0).toUpperCase() +
                                             realTitle.slice(1);
@@ -1504,12 +1512,12 @@ function Home() {
 
                                     if (
                                         // @ts-ignore
-                                        Cobalt.favorites.filter(
+                                        window[jsNamespace].favorites.filter(
                                             (item: any) => item.url == url
                                         ).length > 0
                                     ) {
                                         // @ts-ignore
-                                        let tempFavorites = Cobalt.favorites;
+                                        let tempFavorites = window[jsNamespace].favorites;
 
                                         let currentFavoriteItem =
                                             tempFavorites.filter(
@@ -1676,7 +1684,7 @@ function Home() {
                                                 )[1];
                                         } else {
                                             var url =
-                                                "cobalt://" +
+                                                `${internalNamespace}://` +
                                                 new URL(
                                                     // @ts-ignore
                                                     web.current.contentWindow.navigation.currentEntry.url
@@ -1721,15 +1729,15 @@ function Home() {
                                                 : "";
 
                                             if (
-                                                url.startsWith("cobalt://") ||
+                                                url.startsWith(`${internalNamespace}://`) ||
                                                 url.startsWith("view-source:")
                                             ) {
                                                 favicon = "";
                                             }
 
-                                            if (url.startsWith("cobalt://")) {
+                                            if (url.startsWith(`${internalNamespace}://`)) {
                                                 title =
-                                                    url.split("cobalt://")[1];
+                                                    url.split(`${internalNamespace}://`)[1];
                                                 title =
                                                     title
                                                         .charAt(0)
@@ -1839,7 +1847,7 @@ function Home() {
                                     ).split("/internal/viewsource?url=")[1];
                             } else {
                                 var url =
-                                    "cobalt://" +
+                                    `${internalNamespace}://` +
                                     web.current.contentWindow.location.pathname.split(
                                         "/internal/"
                                     )[1];
@@ -1886,14 +1894,45 @@ function Home() {
         }
     }
 
+    const isInternalURL = (value: string) => {
+        const currentHost = new URL(window.location.href);
+        if (value.startsWith(currentHost.origin) || (value.startsWith(`${internalNamespace}://`))) {
+            if (value.startsWith(currentHost.origin)) {
+                try {
+                    const path = currentHost.pathname;
+                    const endpoint = path.split("/internal/")[1];
+                    if (internalURLS.includes(endpoint)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch {
+                    return false;
+                }
+            } else if (value.startsWith(`${internalNamespace}://`)) {
+                try {
+                    const endpoint = value.split(`${internalNamespace}://`)[1];
+                    if (internalURLS.includes(endpoint)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
     const searchURL = (value: string) => {
         value = value.trim();
 
         setLoading(true);
 
         if (
-            value.startsWith("cobalt://") &&
-            internalURLS.includes(value.split("cobalt://")[1])
+            isInternalURL(value)
         ) {
             if (search.current && search.current.value) {
                 search.current.value = value;
@@ -1901,7 +1940,7 @@ function Home() {
             if (web.current && web.current.contentWindow) {
                 // @ts-ignore
                 web.current.contentWindow.location = new URL(
-                    "/internal/" + value.split("cobalt://")[1],
+                    "/internal/" + value.split(`${internalNamespace}://`)[1],
                     // @ts-ignore
                     window.location
                 );
@@ -2066,10 +2105,28 @@ function Home() {
         var site = await bare.fetch(
             "https://www.google.com/complete/search?client=firefox&q=" + query
         );
-        var results = await site.json();
-        results = results[1];
-        results = results.slice(0, limit);
-        return results;
+        var internalSites = exposedInternalUrls.map(e => {
+            return (internalNamespace + "://" + e);
+        })
+        var internalResults = internalSites.filter(e => e.startsWith(query));
+
+        var baseResults: SearchSuggestion[] = [];
+
+        if (internalResults.length > 0 && query.startsWith(internalNamespace)) {
+            baseResults = internalResults.map(e => ({
+                internal: true,
+                value: e
+            }));
+        }
+
+        var siteResult = await site.json();
+        var results: SearchSuggestion[] = (siteResult)[1].map((e: string) => ({
+            internal: false,
+            value: e
+        }));
+        baseResults = [...baseResults, ...results];
+        baseResults = baseResults.slice(0, limit);
+        return baseResults;
     };
 
     const searchChange = async (e: any) => {
@@ -2145,9 +2202,9 @@ function Home() {
     }, [currentPanelOption]);
 
     // @ts-ignore
-    if (!window.Cobalt) {
+    if (!window[jsNamespace]) {
         // @ts-ignore
-        window.Cobalt = {
+        window[jsNamespace] = {
             url: currentURL,
             navigate: searchURL,
             reload: reloadPage,
@@ -2180,65 +2237,70 @@ function Home() {
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.sidePanelBodyData = sidePanelBodyData;
+        window[jsNamespace].sidePanelBodyData = sidePanelBodyData;
     }, [sidePanelBodyData]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.history = JSON.parse(history);
+        window[jsNamespace].history = JSON.parse(history);
     }, [history]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.favorites = JSON.parse(localFavorites);
+        window[jsNamespace].favorites = JSON.parse(localFavorites);
     }, [localFavorites]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.extensions = extensions;
+        window[jsNamespace].extensions = extensions;
     }, [extensions]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.web = web;
+        window[jsNamespace].web = web;
     }, [web]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.homeURL = homeURL;
+        window[jsNamespace].homeURL = homeURL;
     }, [homeURL]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.loading = loading;
+        window[jsNamespace].loading = loading;
     }, [loading]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.canGoBack = canGoBack;
+        window[jsNamespace].canGoBack = canGoBack;
     }, [canGoBack]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.canGoForward = canGoForward;
+        window[jsNamespace].canGoForward = canGoForward;
     }, [canGoForward]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.useSuggestions = useSuggestions;
+        window[jsNamespace].useSuggestions = useSuggestions;
     }, [useSuggestions]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.url = currentURL;
+        window[jsNamespace].url = currentURL;
     }, [currentURL]);
 
     React.useEffect(() => {
         // @ts-ignore
-        window.Cobalt.searchEngine = searchEngine;
+        window[jsNamespace].searchEngine = searchEngine;
         // @ts-ignore
-        window.Cobalt.navigate = searchURL;
+        window[jsNamespace].navigate = searchURL;
     }, [searchEngine]);
+
+    React.useEffect(() => {
+        // @ts-ignore
+        window[jsNamespace].isInternalURL = isInternalURL;
+    }, [isInternalURL])
 
     const resizePanelMouseDown = (e: any) => {
         // @ts-ignore
@@ -2347,11 +2409,11 @@ function Home() {
                         onChange={searchChange}
                     />
                     <div className="suggestions">
-                        {suggestions.map((suggestion, index) => (
+                        {suggestions.map((suggestion: SearchSuggestion, index) => (
                             <div
                                 className="suggestion"
                                 onClick={() => {
-                                    searchURL(suggestion);
+                                    searchURL(suggestion.value);
                                     setSuggestions([]);
                                 }}
                                 key={index}
@@ -2364,26 +2426,39 @@ function Home() {
                                         }}
                                     />
                                 </div>
-                                <Obfuscated>{suggestion}</Obfuscated>
+                                <Obfuscated>{suggestion.value}</Obfuscated>
                             </div>
                         ))}
                     </div>
-                    <div className="searchIcon">
-                        <SearchIcon style={{ height: "70%", width: "70%" }} />
-                    </div>
+                    {isInternalURL(currentURL)? 
+                        (<Tooltip title={`You're viewing a Secure ${jsNamespace} page`}>
+                            <div className="searchIcon">
+                                <ServerLogoIcon style={{ height: "70%", width: "70%" }} />
+                            </div>
+                        </Tooltip>) :
+                        (<Tooltip title="Search the Web">
+                            <div className="searchIcon">
+                                <SearchIcon style={{ height: "70%", width: "70%" }} />
+                            </div>
+                        </Tooltip>)
+                    }
                     <div className="favoriteIcon" onClick={toggleFavorite}>
                         {JSON.parse(localFavorites).filter(
                             (item: any) => item.url == currentURL
                         ).length > 0 ? (
-                            <StarIcon
-                                fontSize="small"
-                                style={{ height: "0.95em", width: "0.95em" }}
-                            />
+                            <Tooltip title="Remove from Favorites">
+                                <StarIcon
+                                    fontSize="small"
+                                    style={{ height: "0.95em", width: "0.95em" }}
+                                />
+                            </Tooltip>
                         ) : (
-                            <StarBorderIcon
-                                fontSize="small"
-                                style={{ height: "0.95em", width: "0.95em" }}
-                            />
+                            <Tooltip title="Add to Favorites">
+                                <StarBorderIcon
+                                    fontSize="small"
+                                    style={{ height: "0.95em", width: "0.95em" }}
+                                />
+                            </Tooltip>
                         )}
                     </div>
                 </div>

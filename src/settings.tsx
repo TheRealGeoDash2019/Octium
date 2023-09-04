@@ -6,7 +6,7 @@ const useLocalFallback = (key: string, fallback: string) => {
 };
 
 export var useLocalHistory = () => useLocalFallback("history", "[]");
-export var useLocalAppearance = () => useLocalFallback("appearance", "default");
+export var useLocalAppearance = () => useLocalFallback("appearance", "cobalt2");
 export var useLocalTitle = () => useLocalStorage("title");
 export var useLocalIcon = () => useLocalStorage("icon");
 export var useLocalCustomStyle = () => useLocalFallback("customStyle", "");

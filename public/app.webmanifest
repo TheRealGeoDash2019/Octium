@@ -1,7 +1,7 @@
 {
-    "name": "Cobalt",
-    "short_name": "Cobalt",
-    "description": "A new minimal clean proxy site, built for developers.",
+    "name": "Octium",
+    "short_name": "Octium",
+    "description": "Octium is a secure web browser powered by robot hamsters",
     "icons": [
         {
             "src": "/logos/logo.svg",

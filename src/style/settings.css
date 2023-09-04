@@ -1,0 +1,163 @@
+body, * {
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+}
+
+.settings-navbar-left, .settings-navbar-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    min-width: 160px;
+    max-width: 160px;
+}
+
+.settings-navbar, .settings-navbar-container, .settings-navbar-toolbar {
+    height: 56px !important;
+    min-height: 56px !important;
+}
+
+.settings-navbar-toolbar {
+    justify-content: space-between;
+}
+
+.settings-navbar-title {
+    font-weight: 500 !important;
+    font-size: 170% !important;
+    flex: 1;
+    letter-spacing: -1px !important;
+    line-height: normal !important;
+    margin-inline-start: 6px;
+    padding-inline-end: 12px;
+    white-space: normal;
+    color: var(--primary);
+    user-select: none;
+}
+
+.settings-navbar-search {
+    position: relative;
+    max-width: calc(100% - 0.5rem);
+}
+
+.settingsSearchIcon {
+    color: var(--background);
+    height: calc(100% / 1.5);
+    position: absolute;
+    top: 7.3375px;
+    left: 7.3375px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-circle);
+    aspect-ratio: 1 / 1;
+}
+
+.mainSearch {
+    width: 675px;
+    height: 38px;
+}
+
+.settings-navbar-logo {
+    margin-right: 12px;
+}
+
+.settings-app-drawer {
+    height: 100%;
+    margin-top: 56px;
+    background: var(--primary);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.settings-app-container {
+    margin-left: 250px !important;
+    max-width: calc(100vw - 500px);
+    margin-right: 250px !important;
+}
+
+.settings-app-section {
+    min-width: 550px !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    height: inherit !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    width: calc(100% * 0.96) !important;
+}
+
+.settings-app-section-title h2 {
+    color: var(--background);
+    font-size: 108%;
+    font-weight: 400;
+    letter-spacing: .25px;
+    margin-bottom: 12px;
+    margin-top: 21px;
+    outline: 0;
+    padding-bottom: 4px;
+    padding-top: 8px;
+}
+
+.settings-app-drawer .MuiDrawer-paper {
+    height: calc(100% - 56px);
+    width: 250px;
+    margin-top: 56px;
+    background: transparent;
+    border-right: 0px transparent !important;
+}
+
+.settings-app-drawer-list {
+    height: calc(100% - 56px);
+}
+
+.settings-app-drawer-tab {
+    border-top-right-radius: 100px !important;
+    border-bottom-right-radius: 100px !important;
+    padding-left: 23px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+}
+
+.settings-app-drawer-tab[active] {
+    background-color: var(--background) !important;
+    color: var(--primary) !important;
+}
+
+.settings-app-drawer-tab[active] .settings-app-drawer-tab-label span {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.settings-app-drawer-tab[active] .settings-app-drawer-tab-icon path {
+    fill: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+.settings-app-drawer-tab-icon-container {
+    min-width: 0px !important;
+}
+
+.settings-app-drawer-tab-icon > path {
+    fill: var(--background) !important;
+    color: var(--background) !important;
+}
+
+.settings-app-drawer-tab-icon {
+    margin-right: 20px !important;
+    min-width: 0px !important;
+}
+
+.settings-app-drawer-tab-label span {
+    font-size: 14px !important;
+    line-height: 14px !important;
+    color: var(--background) !important;
+}
+
+.settings-app-drawer-divider {
+    border-bottom: 0.1px solid var(--background);
+    border-top: 0px solid transparent;
+    border-right: 20px solid transparent;
+    border-left: 0px solid transparent;
+}

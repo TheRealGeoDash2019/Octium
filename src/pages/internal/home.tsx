@@ -1,10 +1,15 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import Tooltip from '@mui/material/Tooltip';
 import Head from "../../components/head";
-import { github, discord } from "../../consts";
 import "../../style/home.css";
 import { Obfuscated } from "../../components/obfuscate";
 import { useLocalAppearance } from "../../settings";
+import { jsNamespace } from "../../consts";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import 'regenerator-runtime/runtime';
 
 function InternalHome() {
     const mainSearch = React.useRef<HTMLInputElement>(null);
@@ -44,12 +49,42 @@ function InternalHome() {
         mainSearch?.current?.focus();
     }, []);
 
+    const {
+        interimTranscript,
+        transcript,
+        listening,
+        resetTranscript,
+        browserSupportsSpeechRecognition,
+        isMicrophoneAvailable
+    } = useSpeechRecognition();
+
     const searchType = (e: any) => {
         if (e.key == "Enter" && e.target.value) {
             // @ts-ignore
-            return window.parent.Cobalt.navigate(e.target.value);
+            return window.parent[jsNamespace].navigate(e.target.value);
         }
     };
+    let isListening = false;
+    const startListening = async function() {
+        if (isListening === true) {
+            isListening = false;
+            return (SpeechRecognition.stopListening, SpeechRecognition.abortListening());
+        } else {
+            isListening = true;
+            SpeechRecognition.startListening().then(() => {
+                const waitForStop = function() {
+                    setTimeout(() => {
+                        if (!listening) {
+                            mainSearch.current.value = transcript.toString();
+                        } else {
+                            waitForStop();
+                        }
+                    }, 2000);
+                };
+                waitForStop();
+            })
+        }
+    }
 
     return (
         <>
@@ -62,7 +97,7 @@ function InternalHome() {
                         xmlnsXlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 24 24"
                     >
-                        <title>Cobalt</title>
+                        <title>{jsNamespace}</title>
                         <path
                             fill={theme}
                             d="M 0 13.023 L 4.429 18.595 L 20.714 18.261 L 24 12.309 L 20.998 3.971 L 13.88 8.904 L 7.919 7.125 L 0 13.023 Z"
@@ -74,21 +109,34 @@ function InternalHome() {
                         ref={mainSearch}
                         className="mainSearch"
                         onKeyUp={searchType}
+                        readOnly={false}
                     />
                     <div className="homeSearchIcon">
                         <SearchIcon style={{ height: "70%", width: "70%" }} />
                     </div>
+                    {(isMicrophoneAvailable? (
+                        (browserSupportsSpeechRecognition)? (
+                            <Tooltip title={(listening? "Listening..." : "Search by voice")}>
+                                <div onClick={startListening} className={`homeSpeechInputIcon${(listening? " listening" : "")}`}>
+                                    <KeyboardVoiceIcon style={{ height: "70%", width: "70%" }} />
+                                </div>
+                            </Tooltip>
+                        ) : (
+                            <Tooltip title="Search by voice is Unsupported">
+                                <div className="homeSpeechInputIcon unavailable">
+                                    <KeyboardVoiceIcon style={{ height: "70%", width: "70%" }} />
+                                </div>
+                            </Tooltip>
+                        )
+                    ) : (<Tooltip title="Your microphone is unavailable">
+                        <div className="homeSpeechInputIcon unavailable">
+                            <MicOffIcon style={{ height: "70%", width: "70%" }} />
+                        </div>
+                    </Tooltip>))}
                 </div>
             </div>
             <div className="footer">
-                <Obfuscated>Cobalt 2023 | </Obfuscated>
-                <a target="_blank" href={discord}>
-                    <Obfuscated>Discord</Obfuscated>
-                </a>
-                <Obfuscated> / </Obfuscated>
-                <a target="_blank" href={github}>
-                    <Obfuscated>Source</Obfuscated>
-                </a>
+                <Obfuscated>{jsNamespace} {(new Date()).getFullYear()}</Obfuscated>
             </div>
         </>
     );
