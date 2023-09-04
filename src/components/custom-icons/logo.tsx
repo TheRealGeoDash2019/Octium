@@ -1,10 +1,11 @@
 import SvgIcon from '@mui/material/SvgIcon';
-import { jsx } from "react/jsx-runtime";
-import _extends from "@babel/runtime/helpers/esm/extends";
+import _extends from '../utils/extends';
 import * as React from "react";
+import { jsx } from '@emotion/react';
 
-function createSvgIcon(path, displayName) {
-    function Component(props, ref) {
+function createSvgIcon(path: any, displayName: any) {
+    // @ts-ignore
+    function Component(props: any, ref: any) {
       return jsx(SvgIcon, _extends({
         "data-testid": `${displayName}Icon`,
         ref: ref

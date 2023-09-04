@@ -128,6 +128,7 @@ function InternalSettings() {
                         </List>
                     </Drawer>
                     <Container maxWidth="xl" className="settings-app-container">
+                        { /* @ts-ignore */ }
                         <SettingsSection title={activeTab}></SettingsSection>
                     </Container>
                     <div className="spacer-from-drawer"></div>

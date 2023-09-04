@@ -15,9 +15,9 @@
         "jsx": "react-jsx",
 
         /* Linting */
-        "strict": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
+        "noImplicitAny": false,
         "types": ["node", "vite/client"]
     },
     "include": ["src", "./config/uv/uv.config.ts"],

@@ -1,9 +1,9 @@
 import { jsNamespace, internalNamespace, exposedInternalUrls } from "../../consts";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import React, { useEffect } from "react";
+import React, { useEffect, ComponentProps } from "react";
 
-interface SectionTitle {
+interface SettingsSectionProps {
     title?: string;
 }
 
@@ -12,18 +12,19 @@ const replacementTitle = {
 }
 
 class SettingsSection extends React.Component {
-    constructor(props) {
+    constructor(props: SettingsSectionProps) {
         super(props);
     }
 
     render() {
+        const title = this.props["title"];
         return (
             <>
                 <Container className="settings-app-section">
                     <div className="settings-app-section-page">
                         <div className="settings-app-section-title">
                             <Typography variant="h2">
-                                {(replacementTitle[this.props.title]? replacementTitle[this.props.title]: this.props.title)}
+                                {(replacementTitle[title]? replacementTitle[title]: title)}
                             </Typography>
                         </div>
                     </div>

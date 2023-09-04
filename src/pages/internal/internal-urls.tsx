@@ -45,7 +45,7 @@ function InternalURLS() {
             <ul>
                 {...exposedInternalUrls.map(e => {
                     return (<li>
-                        <a href="#" title={`${internalNamespace}://${e}`} onClick={() => { window.parent.Octium.navigate(`${internalNamespace}://${e}`) }}>{`${internalNamespace}://${e}`}</a>
+                        <a href="#" title={`${internalNamespace}://${e}`} onClick={() => { window.parent[jsNamespace].navigate(`${internalNamespace}://${e}`) }}>{`${internalNamespace}://${e}`}</a>
                     </li>)
                 })}
             </ul>
