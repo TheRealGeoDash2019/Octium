@@ -11,6 +11,9 @@
 <a href="https://app.koyeb.com/deploy?type=git&repository=github.com/TheRealGeoDash2019/Octium&branch=main&name=Octium"><img height="30px" src="https://raw.githubusercontent.com/FogNetwork/Tsunami/main/deploy/koyeb2.svg"><img></a>
 </p>
 
+### Warning about using Replit, Glitch or Railway
+Due to the dependencies of this project, it will not allow Ultraviolet to install. If you plan on using this on any of the platforms, consider forking and modifying the code to bypass it.
+
 ## Features
 - Simple clean design
 - Side panel for quick access to anything, anywhere
