@@ -946,10 +946,6 @@ function Home() {
                     <div className="sidePanelThemePreview"></div>
                     <Obfuscated>Matrix</Obfuscated>
                 </ThemeOption>
-                <ThemeOption theme="gruvbox">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Gruvbox</Obfuscated>
-                </ThemeOption>
                 <ThemeOption theme="quantum">
                     <div className="sidePanelThemePreview"></div>
                     <Obfuscated>Quantum</Obfuscated>
@@ -1117,10 +1113,6 @@ function Home() {
                 <ThemeOption theme="eaglenet">
                     <div className="sidePanelThemePreview"></div>
                     <Obfuscated>Eaglenet</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="ludicrous">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Ludicrous</Obfuscated>
                 </ThemeOption>
                 <ThemeOption theme="mercury-workshop">
                     <div className="sidePanelThemePreview"></div>

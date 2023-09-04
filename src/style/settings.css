@@ -60,6 +60,10 @@ body, * {
     margin-right: 12px;
 }
 
+.settings-navbar-logo path {
+    color: var(--primary) !important;
+}
+
 .settings-app-drawer {
     height: 100%;
     margin-top: 56px;

@@ -12,8 +12,9 @@
     flex-direction: column;
 }
 
-.logo {
-    width: 160px;
+.homeLogo {
+    width: 120px;
+    padding-bottom: 14px;
 }
 
 .title {

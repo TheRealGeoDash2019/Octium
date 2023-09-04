@@ -97,8 +97,8 @@ body {
 
 @media (prefers-color-scheme: dark) {
     body[data-appearance="default"] {
-        --background: #030303;
-        --primary: #09283e;
+        --background: #151515;
+        --primary: #135328;
         --text: white;
         --text-inverse: white;
         --font: "Noto Sans";
@@ -108,7 +108,7 @@ body {
 @media (prefers-color-scheme: light) {
     body[data-appearance="default"] {
         --background: #bfc5cf;
-        --primary: #104972;
+        --primary: #27AC54;
         --text: black;
         --text-inverse: white;
         --font: "Noto Sans";
@@ -116,8 +116,8 @@ body {
 }
 
 body[data-appearance="dark"] {
-    --background: #030303;
-    --primary: #09283e;
+    --background: #151515;
+    --primary: #135328;
     --text: white;
     --text-inverse: white;
     --font: "Noto Sans";
@@ -125,7 +125,7 @@ body[data-appearance="dark"] {
 
 body[data-appearance="light"] {
     --background: #bfc5cf;
-    --primary: #104972;
+    --primary: #27AC54;
     --text: black;
     --text-inverse: white;
     --font: "Noto Sans";
@@ -769,14 +769,6 @@ body[data-appearance="discord"] {
     --primary: #5865f2;
     --text: white;
     --text-inverse: black;
-    --font: "Noto Sans";
-}
-
-body[data-appearance="ludicrous"] {
-    --background: black;
-    --primary: linear-gradient(90deg, #0c2f4b, #030b11);
-    --text: white;
-    --text-inverse: white;
     --font: "Noto Sans";
 }
 

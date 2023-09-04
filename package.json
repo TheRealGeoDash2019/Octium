@@ -7,7 +7,7 @@
     "author": "TheRealGeoDash2019",
     "type": "module",
     "dependencies": {
-        "@babel/runtime": "^7.22.15",
+        "@babel/runtime": "^7.21.0",
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@monaco-editor/react": "^4.5.1",

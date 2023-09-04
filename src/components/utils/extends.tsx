@@ -12,5 +12,5 @@ const _internalExtends = (Object.assign ? Object.assign.bind() : function (targe
 });
 
 export default function _extends(...args: any[]) {
-  return _internalExtends.apply(this, ...args);
+  return Object.assign.apply(this, args);
 };
