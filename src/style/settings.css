@@ -79,17 +79,6 @@ body, * {
     margin-right: 250px !important;
 }
 
-.settings-app-section {
-    min-width: 550px !important;
-    max-width: 680px !important;
-    margin: 0 auto !important;
-    height: inherit !important;
-    display: block !important;
-    box-sizing: border-box !important;
-    position: relative !important;
-    width: calc(100% * 0.96) !important;
-}
-
 .settings-app-section-title h2 {
     color: var(--background);
     font-size: 108%;
@@ -164,4 +153,47 @@ body, * {
     border-top: 0px solid transparent;
     border-right: 20px solid transparent;
     border-left: 0px solid transparent;
+}
+
+.settings-app-section {
+    min-width: 550px !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    height: inherit !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    width: calc(100% * 0.96) !important;
+}
+
+.settings-app-section-settings {
+    border-radius: 12px;
+}
+
+.settings-app-section-setting {
+    padding: 0 20px;
+    cursor: pointer;
+    background: var(--background);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+}
+
+.settings-app-section-setting-label {
+    flex: 1;
+    flex-basis: 1e-9px;
+    margin-inline-end: 20px!important;
+    padding: 12px 0;
+    font-size: 81.25%;
+    line-height: 154%;
+}
+
+.settings-app-section-setting-title {
+    color: var(--text);
+}
+
+.settings-app-section-setting-subtitle {
+    color: var(--secondary)
 }

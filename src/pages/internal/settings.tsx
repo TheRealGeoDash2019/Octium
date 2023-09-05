@@ -20,6 +20,7 @@ import React from "react";
 import "../../style/home.css";
 import "../../style/settings.css";
 import ServerLogoIcon from "../../components/custom-icons/logo";
+import SettingsSections from "../../components/settings/sections";
 
 function InternalSettings() {
     const settingsSearch = React.useRef<HTMLInputElement>(null);
@@ -116,7 +117,9 @@ function InternalSettings() {
                     </Drawer>
                     <Container maxWidth="xl" className="settings-app-container">
                         { /* @ts-ignore */ }
-                        <SettingsSection title={activeTab}></SettingsSection>
+                        <SettingsSection title={activeTab}>
+                            {...Array.from(SettingsSections[activeTab])}
+                        </SettingsSection>
                     </Container>
                     <div className="spacer-from-drawer"></div>
                 </div>

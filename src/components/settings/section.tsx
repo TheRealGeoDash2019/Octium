@@ -1,10 +1,12 @@
 import { jsNamespace, internalNamespace, exposedInternalUrls } from "../../consts";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import React, { useEffect, ComponentProps } from "react";
+import React, { useEffect, ComponentProps, Children } from "react";
 
 interface SettingsSectionProps {
     title?: string;
+    settings?: any[];
+    children?: any[];
 }
 
 const replacementTitle = {
@@ -18,6 +20,8 @@ class SettingsSection extends React.Component {
 
     render() {
         const title = this.props["title"];
+        const settings = this.props["settings"] || [];
+        const children = Children.toArray(this.props["children"]) || [];
         return (
             <>
                 <Container className="settings-app-section">
@@ -26,6 +30,9 @@ class SettingsSection extends React.Component {
                             <Typography variant="h2">
                                 {(replacementTitle[title]? replacementTitle[title]: title)}
                             </Typography>
+                        </div>
+                        <div className="settings-app-section-settings">
+                            {...children}
                         </div>
                     </div>
                 </Container>
