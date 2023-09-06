@@ -4,40 +4,28 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, ComponentProps } from "react";
 import { alpha, styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-interface SectionSwitchProps {
+interface SectionExternalLinkProps {
     title?: string;
     subtitle?: string;
-    active?: boolean;
-    onChange?: Function;
+    link?: string;
     className?: string;
 }
 
-const ThemedSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: "var(--primary)",
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: "var(--primary)",
-    },
-  }));
-
-
-
-class SettingsSectionSwitch extends React.Component {
-    constructor(props: SectionSwitchProps) {
+class SettingsSectionExternalLink extends React.Component {
+    constructor(props: SectionExternalLinkProps) {
         super(props);
     }
 
     render() {
         const title = this.props["title"] || "Setting Name";
-        const subtitle = this.props["subtitle"] || "Setting Subtitle";
-        let active = this.props["active"] || false;
-        const updateFunc = this.props["onChange"] || (() => null);
+        const subtitle = this.props["subtitle"] || "";
+        const link = this.props["link"] || `${internalNamespace}://blank`;
         const className = this.props["className"] || "";
         return (
             <>
-                <div className={`settings-app-section-setting ${className}`}>
+                <div className={`settings-app-section-setting setting-clickable ${className}`} onClick={() => { window.parent[jsNamespace].navigate(link)}}>
                     <div className="settings-app-section-setting-label">
                         <div className="settings-app-section-setting-title">
                             {title}
@@ -47,13 +35,11 @@ class SettingsSectionSwitch extends React.Component {
                         </div>
                     </div>
                     { /* @ts-ignore */ }
-                    <ThemedSwitch checked={active} onChange={updateFunc}>
-
-                    </ThemedSwitch>
+                    <OpenInNewIcon className="settings-app-section-setting-icon"></OpenInNewIcon>
                 </div>
             </>
         )
     }
 }
 
-export default SettingsSectionSwitch;
+export default SettingsSectionExternalLink;

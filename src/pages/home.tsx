@@ -15,6 +15,7 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 import { ReactComponent as DockSVG } from "../assets/dock-to-left-filled.svg";
 import HomeIcon from "@mui/icons-material/Home";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Tooltip from "@mui/material/Tooltip";
 import { BareClient } from "@tomphttp/bare-client";
 import clsx from "clsx";
@@ -2471,6 +2472,12 @@ function Home() {
                         <DockSVG
                             style={{ height: "0.95em", width: "0.95em", fontSize: "1.25rem" }}
                         />
+                    </div>
+                    <div
+                        className="controlsButton"
+                        onClick={() => null}
+                    >
+                        <MoreVertIcon style={{ height: "0.95em", width: "0.95em", fontSize: "1.25rem" }}></MoreVertIcon>
                     </div>
                 </div>
             </div>

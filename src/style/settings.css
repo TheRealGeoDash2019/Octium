@@ -166,19 +166,17 @@ body, * {
     width: calc(100% * 0.96) !important;
 }
 
-.settings-app-section-settings {
-    border-radius: 12px;
-}
-
 .settings-app-section-setting {
     padding: 0 20px;
-    cursor: pointer;
     background: var(--background);
+    color: var(--primary);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     min-height: 48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
 }
 
 .settings-app-section-setting-label {
@@ -195,5 +193,43 @@ body, * {
 }
 
 .settings-app-section-setting-subtitle {
-    color: var(--secondary)
+    color: var(--text);
+    opacity: 0.6;
+}
+
+.settings-app-section-setting-select {
+    background: var(--secondary);
+    color: var(--text);
+}
+
+.setting-clickable {
+    cursor: pointer;
+}
+
+.first-subsetting {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top: none !important;
+}
+
+.last-subsetting {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.settings-app-section-setting-icon {
+    opacity: 0.6;
+}
+
+.settings-app-section-setting-header-icons {
+    margin-right: 12px;
+    margin-left: 4px;
+}
+
+.settings-app-section-setting-header {
+    font-size: 153.85%;
+    font-weight: 400;
+    margin-bottom: auto;
+    margin-top: auto;
+    padding: 12px 0;
 }

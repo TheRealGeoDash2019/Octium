@@ -1,3 +1,4 @@
+// @ts-nocheck
 import SettingsSection from "../section";
 import SettingsSectionSwitch from "../settingSwitch";
 import SettingsSectionDropdown from "../settingDropdown";
@@ -6,13 +7,13 @@ import React from "react";
 import { jsNamespace, internalNamespace } from "../../../consts";
 import { useLocalAppearance } from "../../../settings";
 
-const [localAppearance, setLocalAppearance] = useLocalAppearance();
-
-const Appearance = [
-    // @ts-ignore
-    <SettingsSectionSwitch title="Show home button" subtitle="Testing" active={true}></SettingsSectionSwitch>,
-    // @ts-ignore
-    <SettingsSectionDropdown title="Theme" subtitle={localAppearance}></SettingsSectionDropdown>
-];
+function Appearance({ }) {
+    const [localAppearance, setLocalAppearance] = useLocalAppearance();
+    return (
+        <>
+            <SettingsSectionDropdown className="first-subsetting last-subsetting" title="Theme" subtitle={`Set to: ${localAppearance}`}></SettingsSectionDropdown>
+        </>
+    )
+}
 
 export default Appearance;

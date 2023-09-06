@@ -1,40 +1,28 @@
 import { jsNamespace, internalNamespace, exposedInternalUrls } from "../../consts";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import React, { useEffect, ComponentProps } from "react";
+import React, { useEffect, ComponentProps, Children } from "react";
 import { alpha, styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
-interface SectionSwitchProps {
+interface SectionInfoProps {
     title?: string;
     subtitle?: string;
-    active?: boolean;
-    onChange?: Function;
     className?: string;
+    children?: any[];
 }
 
-const ThemedSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: "var(--primary)",
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: "var(--primary)",
-    },
-  }));
 
-
-
-class SettingsSectionSwitch extends React.Component {
-    constructor(props: SectionSwitchProps) {
+class SettingsSectionInfo extends React.Component {
+    constructor(props: SectionInfoProps) {
         super(props);
     }
 
     render() {
         const title = this.props["title"] || "Setting Name";
-        const subtitle = this.props["subtitle"] || "Setting Subtitle";
-        let active = this.props["active"] || false;
-        const updateFunc = this.props["onChange"] || (() => null);
+        const subtitle = this.props["subtitle"] || "";
         const className = this.props["className"] || "";
+        const children = Children.toArray(this.props["children"]) || [];
         return (
             <>
                 <div className={`settings-app-section-setting ${className}`}>
@@ -47,13 +35,13 @@ class SettingsSectionSwitch extends React.Component {
                         </div>
                     </div>
                     { /* @ts-ignore */ }
-                    <ThemedSwitch checked={active} onChange={updateFunc}>
-
-                    </ThemedSwitch>
+                    <div className="settings-app-section-setting-icons">
+                        { ...children }
+                    </div>
                 </div>
             </>
         )
     }
 }
 
-export default SettingsSectionSwitch;
+export default SettingsSectionInfo;

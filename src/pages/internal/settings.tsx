@@ -72,6 +72,17 @@ function InternalSettings() {
         // }
     };
 
+    const getSettingContent = () => {
+        switch (activeTab) {
+            case "About":
+                return (<SettingsSections.About></SettingsSections.About>);
+            case "Appearance":
+                return (<SettingsSections.Appearance></SettingsSections.Appearance>)
+            default:
+                return (<></>)
+        }
+    }
+
     return (
         <>
             <Head defaultTitle="Settings" />
@@ -118,7 +129,7 @@ function InternalSettings() {
                     <Container maxWidth="xl" className="settings-app-container">
                         { /* @ts-ignore */ }
                         <SettingsSection title={activeTab}>
-                            {...Array.from(SettingsSections[activeTab])}
+                            { getSettingContent() }
                         </SettingsSection>
                     </Container>
                     <div className="spacer-from-drawer"></div>

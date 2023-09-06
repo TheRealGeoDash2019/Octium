@@ -2,9 +2,9 @@ import { jsNamespace, internalNamespace, exposedInternalUrls } from "../../const
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, ComponentProps } from "react";
-import { alpha, styled } from '@mui/material/styles';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { parseColor, getAppropriateColor } from "../utils/color";
 
 interface SectionDropdownProps {
     title?: string;
@@ -12,6 +12,7 @@ interface SectionDropdownProps {
     options?: string[];
     active?: string;
     onChange?: Function;
+    className?: string;
 }
 
 class SettingsSectionDropdown extends React.Component {
@@ -25,9 +26,10 @@ class SettingsSectionDropdown extends React.Component {
         let active = this.props["active"] || false;
         const options = this.props["options"] || [];
         const updateFunc = this.props["onChange"] || (() => null);
+        const className = this.props["className"] || "";
         return (
             <>
-                <div className="settings-app-section-setting">
+                <div className={`settings-app-section-setting ${className}`}>
                     <div className="settings-app-section-setting-label">
                         <div className="settings-app-section-setting-title">
                             {title}
@@ -36,7 +38,7 @@ class SettingsSectionDropdown extends React.Component {
                             {subtitle}
                         </div>
                     </div>
-                    <Select>
+                    <Select value={"testing"} className="settings-app-section-setting-select">
                         <MenuItem value={"testing"}>Testing</MenuItem>
                     </Select>
                 </div>
