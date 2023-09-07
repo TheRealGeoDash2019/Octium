@@ -85,7 +85,8 @@ function InternalSettings() {
     const setUrlBar = (pathname = "blank") => {
         // Warning: very buggy?
         try {
-// @ts-ignore            window.parent.document.querySelector(`.search`).value = `${internalNamespace}://${pathname}`;
+// @ts-ignore
+window.parent.document.querySelector(`.search`).value = `${internalNamespace}://${pathname}`;
         } catch(err) {
             // Probably not updated. Just ignore.
         }
