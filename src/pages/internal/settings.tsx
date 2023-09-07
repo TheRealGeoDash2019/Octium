@@ -15,7 +15,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import PaletteIcon from '@mui/icons-material/Palette';
-import { jsNamespace } from "../../consts";
+import { internalNamespace, jsNamespace } from "../../consts";
 import React from "react";
 import "../../style/home.css";
 import "../../style/settings.css";
@@ -37,8 +37,18 @@ function InternalSettings() {
                   .trim()
     );
 
+    const getOrigin = () => {
+        const internalUrl = new URL("/internal", window.parent.origin).href;
+        const pathname = window.location.href.replace(internalUrl, ``);
+        const [page, ...subpage] = pathname.split("/").filter(e => e !== "");
+        return ({
+            page,
+            subpage
+        })
+    }
+
     const [activeTab, setActiveTab] = React.useState(
-        "Appearance"
+        (getOrigin().subpage? getOrigin().subpage[0] : "appearance") || "appearance"
     );
     // @ts-ignore
     globalThis.changeTheme = (theme: string) => {
@@ -72,11 +82,22 @@ function InternalSettings() {
         // }
     };
 
+    const setUrlBar = (pathname = "blank") => {
+        // Warning: very buggy?
+        try {
+            window.parent.document.querySelector(`.search`).value = `${internalNamespace}://${pathname}`;
+        } catch(err) {
+            // Probably not updated. Just ignore.
+        }
+    }
+
     const getSettingContent = () => {
         switch (activeTab) {
-            case "About":
+            case "help":
+                setUrlBar("settings/help");
                 return (<SettingsSections.About></SettingsSections.About>);
-            case "Appearance":
+            case "appearance":
+                setUrlBar("settings/appearance");
                 return (<SettingsSections.Appearance></SettingsSections.Appearance>)
             default:
                 return (<></>)
@@ -107,8 +128,8 @@ function InternalSettings() {
                         className="settings-app-drawer"
                     >
                         <List className="settings-app-drawer-list">
-                            <ListItem key="Appearance" disablePadding onClick={() => { setActiveTab("Appearance"); }}>
-                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "Appearance")? { "active": "true" } : {}) }>
+                            <ListItem key="Appearance" disablePadding onClick={() => { setActiveTab("appearance"); }}>
+                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "appearance")? { "active": "true" } : {}) }>
                                     <ListItemIcon className="settings-app-drawer-tab-icon-container">
                                         <PaletteIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></PaletteIcon>
                                     </ListItemIcon>
@@ -116,8 +137,8 @@ function InternalSettings() {
                                 </ListItemButton>
                             </ListItem>
                             <hr className="settings-app-drawer-divider"></hr>
-                            <ListItem key="About" disablePadding onClick={() => { setActiveTab("About"); }}>
-                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "About")? { "active": "true" } : {}) }>
+                            <ListItem key="About" disablePadding onClick={() => { setActiveTab("help"); }}>
+                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "help")? { "active": "true" } : {}) }>
                                     <ListItemIcon className="settings-app-drawer-tab-icon-container">
                                         <ServerLogoIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></ServerLogoIcon>
                                     </ListItemIcon>

@@ -37,7 +37,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/internal/settings"
+                    path="/internal/settings*"
                     element={
                         <Suspense fallback={<></>}>
                             <InternalSettings />

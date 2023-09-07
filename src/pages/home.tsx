@@ -1896,6 +1896,9 @@ function Home() {
                     const endpoint = path.split("/internal/")[1];
                     if (internalURLS.includes(endpoint)) {
                         return true;
+                    } else if (internalURLS.find(e => endpoint.startsWith(e + "/"))) {
+                        // Cases such as /endpoint/extraContent
+                        return true;
                     } else {
                         return false;
                     }
@@ -1906,6 +1909,9 @@ function Home() {
                 try {
                     const endpoint = value.split(`${internalNamespace}://`)[1];
                     if (internalURLS.includes(endpoint)) {
+                        return true;
+                    } else if (internalURLS.find(e => endpoint.startsWith(e + "/"))) {
+                        // Cases such as /endpoint/extraContent
                         return true;
                     } else {
                         return false;

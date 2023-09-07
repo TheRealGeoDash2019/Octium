@@ -233,3 +233,25 @@ body, * {
     margin-top: auto;
     padding: 12px 0;
 }
+
+.settings-app-section-setting-select {
+    max-width: 200px;
+    width: 200px;
+    color: var(--text) !important;
+    font-size: 81.25% !important;
+    line-height: 154% !important;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0.3);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    max-width: 100%;
+    outline: 0;
+    padding-bottom: 6px;
+    padding-inline-end: calc(8px + 13px);
+    padding-inline-start: 8px;
+    padding-top: 6px;
+}

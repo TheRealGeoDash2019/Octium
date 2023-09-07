@@ -1,15 +1,16 @@
 import { jsNamespace, internalNamespace, exposedInternalUrls } from "../../consts";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import React, { useEffect, ComponentProps } from "react";
+import React, { useEffect, ComponentProps, Children } from "react";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import FormControl from "@mui/material/FormControl";
 import { parseColor, getAppropriateColor } from "../utils/color";
 
 interface SectionDropdownProps {
     title?: string;
     subtitle?: string;
-    options?: string[];
+    children?: any[];
     active?: string;
     onChange?: Function;
     className?: string;
@@ -24,7 +25,7 @@ class SettingsSectionDropdown extends React.Component {
         const title = this.props["title"] || "Setting Name";
         const subtitle = this.props["subtitle"] || "Setting Subtitle";
         let active = this.props["active"] || false;
-        const options = this.props["options"] || [];
+        const children = Children.toArray(this.props["children"]) || [];
         const updateFunc = this.props["onChange"] || (() => null);
         const className = this.props["className"] || "";
         return (
@@ -38,9 +39,9 @@ class SettingsSectionDropdown extends React.Component {
                             {subtitle}
                         </div>
                     </div>
-                    <Select value={"testing"} className="settings-app-section-setting-select">
-                        <MenuItem value={"testing"}>Testing</MenuItem>
-                    </Select>
+                    <select className="settings-app-section-setting-select" onChange={updateFunc} value={active}>
+                        { ...children }
+                    </select>
                 </div>
             </>
         )

@@ -10,7 +10,8 @@ interface SettingsSectionProps {
 }
 
 const replacementTitle = {
-    "About": `About ${jsNamespace}`
+    "help": `About ${jsNamespace}`,
+    "appearance": "Appearance"
 }
 
 class SettingsSection extends React.Component {
