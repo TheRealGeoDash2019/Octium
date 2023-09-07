@@ -242,6 +242,8 @@ body, * {
     line-height: 154% !important;
     -webkit-appearance: none;
     background-color: rgba(0,0,0,0.3);
+    background: url('/ui/arrow_down.svg') calc(100% - 8px) center no-repeat;
+    background-size: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
