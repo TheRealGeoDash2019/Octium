@@ -11,13 +11,10 @@ interface SettingsSectionProps {
 
 const replacementTitle = {
     "help": `About ${jsNamespace}`,
-<<<<<<< HEAD
     "appearance": "Appearance"
-=======
     "appearance": "Appearance",
     "cloaking": "Cloaking",
     "search": "Search Engine"
->>>>>>> 2e66843 (Git broken)
 }
 
 class SettingsSection extends React.Component {
