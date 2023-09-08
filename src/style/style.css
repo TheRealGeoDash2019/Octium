@@ -241,10 +241,7 @@ body::-webkit-scrollbar-thumb {
 
 .suggestionIcon .MuiSvgIcon-root path,
 .favoriteIcon .MuiSvgIcon-root path,
-<<<<<<< HEAD
-=======
 .shareIcon .MuiSvgIcon-root path,
->>>>>>> 2e66843 (Git broken)
 .historyPanelFaviconGlobe .MuiSvgIcon-root path,
 .historyPanelRemove .MuiSvgIcon-root path,
 .sidePanelThemePreviewDefault .MuiSvgIcon-root path,
@@ -402,9 +399,6 @@ body::-webkit-scrollbar-thumb {
     transition: background 200ms ease-in-out;
 }
 
-<<<<<<< HEAD
-.favoriteIcon:hover {
-=======
 .shareIcon {
     display: none !important;
     height: 1.5rem;
@@ -423,7 +417,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .favoriteIcon:hover, .shareIcon:hover {
->>>>>>> 2e66843 (Git broken)
     background: var(--secondary-inverse, transparent);
 }
 
@@ -799,8 +792,6 @@ body::-webkit-scrollbar-thumb {
 .resizePanel svg {
     transform: rotate(90deg);
 }
-<<<<<<< HEAD
-=======
 
 .contextMenu {
     position: absolute;
@@ -829,4 +820,3 @@ body::-webkit-scrollbar-thumb {
     cursor: default;
     opacity: 0.8;
 }
->>>>>>> 2e66843 (Git broken)
