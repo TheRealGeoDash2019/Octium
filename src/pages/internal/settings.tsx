@@ -20,6 +20,10 @@ import React from "react";
 import "../../style/home.css";
 import "../../style/settings.css";
 import ServerLogoIcon from "../../components/custom-icons/logo";
+<<<<<<< HEAD
+=======
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+>>>>>>> 2e66843 (Git broken)
 import SettingsSections from "../../components/settings/sections";
 
 function InternalSettings() {
@@ -85,8 +89,12 @@ function InternalSettings() {
     const setUrlBar = (pathname = "blank") => {
         // Warning: very buggy?
         try {
+<<<<<<< HEAD
 // @ts-ignore
 window.parent.document.querySelector(`.search`).value = `${internalNamespace}://${pathname}`;
+=======
+            window.parent.document.querySelector(`.search`).value = `${internalNamespace}://${pathname}`;
+>>>>>>> 2e66843 (Git broken)
         } catch(err) {
             // Probably not updated. Just ignore.
         }
@@ -99,7 +107,17 @@ window.parent.document.querySelector(`.search`).value = `${internalNamespace}://
                 return (<SettingsSections.About></SettingsSections.About>);
             case "appearance":
                 setUrlBar("settings/appearance");
+<<<<<<< HEAD
                 return (<SettingsSections.Appearance></SettingsSections.Appearance>)
+=======
+                return (<SettingsSections.Appearance></SettingsSections.Appearance>);
+            case "cloaking":
+                setUrlBar("settings/cloaking");
+                return (<SettingsSections.Cloaking></SettingsSections.Cloaking>);
+            case "search":
+                setUrlBar("settings/search");
+                return (<SettingsSections.Search></SettingsSections.Search>);
+>>>>>>> 2e66843 (Git broken)
             default:
                 return (<></>)
         }
@@ -137,6 +155,25 @@ window.parent.document.querySelector(`.search`).value = `${internalNamespace}://
                                     <ListItemText className="settings-app-drawer-tab-label" primary="Appearance" />
                                 </ListItemButton>
                             </ListItem>
+<<<<<<< HEAD
+=======
+                            <ListItem key="Cloaking" disablePadding onClick={() => { setActiveTab("cloaking"); }}>
+                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "cloaking")? { "active": "true" } : {}) }>
+                                    <ListItemIcon className="settings-app-drawer-tab-icon-container">
+                                        <VisibilityOffIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></VisibilityOffIcon>
+                                    </ListItemIcon>
+                                    <ListItemText className="settings-app-drawer-tab-label" primary="Cloaking" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key="Search Engine" disablePadding onClick={() => { setActiveTab("search"); }}>
+                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "search")? { "active": "true" } : {}) }>
+                                    <ListItemIcon className="settings-app-drawer-tab-icon-container">
+                                        <SearchIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></SearchIcon>
+                                    </ListItemIcon>
+                                    <ListItemText className="settings-app-drawer-tab-label" primary="Search Engine" />
+                                </ListItemButton>
+                            </ListItem>
+>>>>>>> 2e66843 (Git broken)
                             <hr className="settings-app-drawer-divider"></hr>
                             <ListItem key="About" disablePadding onClick={() => { setActiveTab("help"); }}>
                                 <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "help")? { "active": "true" } : {}) }>

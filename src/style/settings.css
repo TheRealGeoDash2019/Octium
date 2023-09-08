@@ -241,7 +241,11 @@ body, * {
     font-size: 81.25% !important;
     line-height: 154% !important;
     -webkit-appearance: none;
+<<<<<<< HEAD
     background-color: rgba(0,0,0,0.3);
+=======
+    background-color: rgba(127, 127, 127, 0.1) !important;
+>>>>>>> 2e66843 (Git broken)
     background: url('/ui/arrow_down.svg') calc(100% - 8px) center no-repeat;
     background-size: 10px;
     border: none;
@@ -256,4 +260,71 @@ body, * {
     padding-inline-end: calc(8px + 13px);
     padding-inline-start: 8px;
     padding-top: 6px;
+<<<<<<< HEAD
+=======
+}
+
+.settings-app-section-setting-input {
+    max-width: 200px;
+    width: 200px;
+    color: var(--text) !important;
+    font-size: 81.25% !important;
+    line-height: 154% !important;
+    -webkit-appearance: none;
+    background-color: rgba(127, 127, 127, 0.1) !important;
+    border: none;
+    border-radius: 4px;
+    cursor: text;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    max-width: 100%;
+    outline: 0;
+    padding-bottom: 6px;
+    padding-inline-end: calc(8px + 13px);
+    padding-inline-start: 8px;
+    padding-top: 6px;
+}
+
+.settings-app-section-setting-input-extended {
+    max-width: 300px;
+    width: 300px;
+    color: var(--text) !important;
+    font-size: 81.25% !important;
+    line-height: 154% !important;
+    -webkit-appearance: none;
+    background-color: rgba(127, 127, 127, 0.1) !important;
+    border: none;
+    border-radius: 4px;
+    cursor: text;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    max-width: 100%;
+    outline: 0;
+    padding-bottom: 6px;
+    padding-inline-end: calc(8px + 13px);
+    padding-inline-start: 8px;
+    padding-top: 6px;
+}
+
+.settings-app-section-setting-input-extended::placeholder {
+    opacity: 0.5 !important;
+    color: var(--text) !important;
+}
+
+.settings-app-section-setting-input::placeholder {
+    opacity: 0.5 !important;
+    color: var(--text) !important;
+}
+
+.settings-app-section-setting-select option {
+    color: var(--text) !important;
+    background: var(--background) !important;
+}
+
+.settings-app-section-setting-icons .sidePanelCloakingPreset {
+    display: inline-flex !important;
+    cursor: pointer !important;
+>>>>>>> 2e66843 (Git broken)
 }

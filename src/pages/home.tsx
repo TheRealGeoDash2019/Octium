@@ -10,6 +10,10 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import PublicIcon from "@mui/icons-material/Public";
 import DeleteIcon from "@mui/icons-material/Delete";
+<<<<<<< HEAD
+=======
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
+>>>>>>> 2e66843 (Git broken)
 import CodeIcon from "@mui/icons-material/Code";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import { ReactComponent as DockSVG } from "../assets/dock-to-left-filled.svg";
@@ -37,6 +41,10 @@ import Editor from "@monaco-editor/react";
 // @ts-ignore
 import mime from "mime-types";
 import ServerLogoIcon from "../components/custom-icons/logo.js";
+<<<<<<< HEAD
+=======
+import ContextMenu from "../components/contexts/contextMenu.js";
+>>>>>>> 2e66843 (Git broken)
 
 interface SearchSuggestion {
     internal?: boolean;
@@ -74,10 +82,13 @@ function Home() {
             component: "themes",
         },
         {
+<<<<<<< HEAD
             name: "Cloaking",
             component: "cloaking",
         },
         {
+=======
+>>>>>>> 2e66843 (Git broken)
             name: "Custom Style",
             component: "customStyle",
         },
@@ -97,6 +108,10 @@ function Home() {
     const [history, setHistory] = useLocalHistory();
     const [loaded, setLoaded] = React.useState(true);
     const [checking, setChecking] = React.useState(false);
+<<<<<<< HEAD
+=======
+    const [showContextMenu, setShowContextMenu] = React.useState(false);
+>>>>>>> 2e66843 (Git broken)
     const defaultExtensions = [
         {
             name: "Dark Reader",
@@ -741,6 +756,7 @@ function Home() {
         );
     };
 
+<<<<<<< HEAD
     const CloakingComponent = () => {
         var [localTitle, setLocalTitle] = useLocalTitle();
         var [localIcon, setLocalIcon] = useLocalIcon();
@@ -830,6 +846,8 @@ function Home() {
         );
     };
 
+=======
+>>>>>>> 2e66843 (Git broken)
     const ThemesComponent = () => {
         return (
             <div className="sidePanelThemes">
@@ -2441,6 +2459,17 @@ function Home() {
                             </div>
                         </Tooltip>)
                     }
+<<<<<<< HEAD
+=======
+                    <div className="shareIcon" onClick={() => null}>
+                        <Tooltip title="Share QR to Page">
+                            <QrCodeScannerIcon
+                                fontSize="small"
+                                style={{ height: "0.95em", width: "0.95em" }}
+                            />
+                        </Tooltip>
+                    </div>
+>>>>>>> 2e66843 (Git broken)
                     <div className="favoriteIcon" onClick={toggleFavorite}>
                         {JSON.parse(localFavorites).filter(
                             (item: any) => item.url == currentURL
@@ -2481,7 +2510,11 @@ function Home() {
                     </div>
                     <div
                         className="controlsButton"
+<<<<<<< HEAD
                         onClick={() => null}
+=======
+                        onClick={() => setShowContextMenu(!showContextMenu)}
+>>>>>>> 2e66843 (Git broken)
                     >
                         <MoreVertIcon style={{ height: "0.95em", width: "0.95em", fontSize: "1.25rem" }}></MoreVertIcon>
                     </div>
@@ -2543,7 +2576,10 @@ function Home() {
                             {{
                                 history: <HistoryComponent />,
                                 themes: <ThemesComponent />,
+<<<<<<< HEAD
                                 cloaking: <CloakingComponent />,
+=======
+>>>>>>> 2e66843 (Git broken)
                                 customStyle: <CustomStyleComponent />,
                                 settings: <SettingsComponent />,
                                 favorites: <FavoritesComponent />,
@@ -2555,6 +2591,10 @@ function Home() {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            {showContextMenu? (<ContextMenu hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
+>>>>>>> 2e66843 (Git broken)
         </>
     );
 }

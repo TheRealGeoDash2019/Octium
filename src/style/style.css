@@ -241,6 +241,10 @@ body::-webkit-scrollbar-thumb {
 
 .suggestionIcon .MuiSvgIcon-root path,
 .favoriteIcon .MuiSvgIcon-root path,
+<<<<<<< HEAD
+=======
+.shareIcon .MuiSvgIcon-root path,
+>>>>>>> 2e66843 (Git broken)
 .historyPanelFaviconGlobe .MuiSvgIcon-root path,
 .historyPanelRemove .MuiSvgIcon-root path,
 .sidePanelThemePreviewDefault .MuiSvgIcon-root path,
@@ -398,7 +402,28 @@ body::-webkit-scrollbar-thumb {
     transition: background 200ms ease-in-out;
 }
 
+<<<<<<< HEAD
 .favoriteIcon:hover {
+=======
+.shareIcon {
+    display: none !important;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: var(--border-radius-circle);
+    background: transparent;
+    position: absolute;
+    right: calc(0.35rem + 1.5rem + 0.15rem);
+    top: 0.35rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 200ms ease-in-out;
+}
+
+.favoriteIcon:hover, .shareIcon:hover {
+>>>>>>> 2e66843 (Git broken)
     background: var(--secondary-inverse, transparent);
 }
 
@@ -774,3 +799,34 @@ body::-webkit-scrollbar-thumb {
 .resizePanel svg {
     transform: rotate(90deg);
 }
+<<<<<<< HEAD
+=======
+
+.contextMenu {
+    position: absolute;
+    border-radius: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background: var(--primary) !important;
+}
+
+.contextMenuButton {
+    min-width: 300px;
+    padding-left: 42px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: var(--text-inverse);
+    font-size: 90%;
+    user-select: none;
+    cursor: pointer;
+}
+
+.contextMenuButton:hover {
+    background: rgba(200, 200, 200, 0.2);
+}
+
+.contextMenuButton[disabled] {
+    cursor: default;
+    opacity: 0.8;
+}
+>>>>>>> 2e66843 (Git broken)

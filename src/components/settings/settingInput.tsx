@@ -7,31 +7,29 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from "@mui/material/FormControl";
 import { parseColor, getAppropriateColor } from "../utils/color";
 
-interface SectionDropdownProps {
+interface SectionInputProps {
     title?: string;
     subtitle?: string;
-    children?: any[];
-    active?: string;
+    initialValue?: string;
     onChange?: Function;
     className?: string;
+    placeholder?: string;
+    extended?: boolean;
 }
 
-class SettingsSectionDropdown extends React.Component {
-    constructor(props: SectionDropdownProps) {
+class SettingsSectionInput extends React.Component {
+    constructor(props: SectionInputProps) {
         super(props);
     }
 
     render() {
         const title = this.props["title"] || "Setting Name";
-<<<<<<< HEAD
-        const subtitle = this.props["subtitle"] || "Setting Subtitle";
-=======
         const subtitle = this.props["subtitle"] || "";
->>>>>>> 2e66843 (Git broken)
-        let active = this.props["active"] || false;
-        const children = Children.toArray(this.props["children"]) || [];
+        const initialValue = this.props["initialValue"] || "";
+        const placeholder = this.props["placeholder"] || "";
         const updateFunc = this.props["onChange"] || (() => null);
         const className = this.props["className"] || "";
+        const isExtended = Boolean(this.props["extended"] || false)
         return (
             <>
                 <div className={`settings-app-section-setting ${className}`}>
@@ -43,13 +41,11 @@ class SettingsSectionDropdown extends React.Component {
                             {subtitle}
                         </div>
                     </div>
-                    <select className="settings-app-section-setting-select" onChange={updateFunc} value={active}>
-                        { ...children }
-                    </select>
+                    <input className={`settings-app-section-setting-input${isExtended? "-extended" : ""}`} onChange={updateFunc} value={initialValue} placeholder={placeholder}></input>
                 </div>
             </>
         )
     }
 }
 
-export default SettingsSectionDropdown;
+export default SettingsSectionInput;
