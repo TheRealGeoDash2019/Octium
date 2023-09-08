@@ -10,10 +10,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import PublicIcon from "@mui/icons-material/Public";
 import DeleteIcon from "@mui/icons-material/Delete";
-<<<<<<< HEAD
-=======
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
->>>>>>> 2e66843 (Git broken)
 import CodeIcon from "@mui/icons-material/Code";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import { ReactComponent as DockSVG } from "../assets/dock-to-left-filled.svg";
@@ -41,10 +38,7 @@ import Editor from "@monaco-editor/react";
 // @ts-ignore
 import mime from "mime-types";
 import ServerLogoIcon from "../components/custom-icons/logo.js";
-<<<<<<< HEAD
-=======
 import ContextMenu from "../components/contexts/contextMenu.js";
->>>>>>> 2e66843 (Git broken)
 
 interface SearchSuggestion {
     internal?: boolean;
@@ -82,13 +76,6 @@ function Home() {
             component: "themes",
         },
         {
-<<<<<<< HEAD
-            name: "Cloaking",
-            component: "cloaking",
-        },
-        {
-=======
->>>>>>> 2e66843 (Git broken)
             name: "Custom Style",
             component: "customStyle",
         },
@@ -108,10 +95,7 @@ function Home() {
     const [history, setHistory] = useLocalHistory();
     const [loaded, setLoaded] = React.useState(true);
     const [checking, setChecking] = React.useState(false);
-<<<<<<< HEAD
-=======
     const [showContextMenu, setShowContextMenu] = React.useState(false);
->>>>>>> 2e66843 (Git broken)
     const defaultExtensions = [
         {
             name: "Dark Reader",
@@ -756,98 +740,6 @@ function Home() {
         );
     };
 
-<<<<<<< HEAD
-    const CloakingComponent = () => {
-        var [localTitle, setLocalTitle] = useLocalTitle();
-        var [localIcon, setLocalIcon] = useLocalIcon();
-        var title = React.useRef<HTMLInputElement>(null);
-        var icon = React.useRef<HTMLInputElement>(null);
-
-        const resetCloaking = () => {
-            setLocalTitle("");
-            setLocalIcon("");
-        };
-
-        interface ChangeIconTypes {
-            title: string;
-            icon: string;
-        }
-
-        function ChangeIcon({ title, icon }: ChangeIconTypes) {
-            return (
-                <div
-                    onClick={() => {
-                        setLocalTitle(title);
-                        setLocalIcon(icon);
-                    }}
-                    className="sidePanelCloakingPreset"
-                >
-                    <img
-                        style={{ pointerEvents: "none" }}
-                        src={icon}
-                        alt={title}
-                    />
-                </div>
-            );
-        }
-
-        return (
-            <>
-                <div className="sidePanelCloakingPresets">
-                    <div
-                        className="sidePanelCloakingPreset"
-                        onClick={resetCloaking}
-                    >
-                        <CloseIcon
-                            style={{ pointerEvents: "none" }}
-                            fontSize="medium"
-                        />
-                    </div>
-                    <ChangeIcon
-                        icon="https://www.google.com/favicon.ico"
-                        title="Google"
-                    />
-                    <ChangeIcon
-                        icon="https://www.drive.google.com/favicon.ico"
-                        title="Google Drive"
-                    />
-                    <ChangeIcon
-                        icon="https://edpuzzle.imgix.net/favicons/favicon-32.png"
-                        title="EdPuzzle"
-                    />
-                    <ChangeIcon
-                        icon="https://st1.zoom.us/zoom.ico"
-                        title="Zoom"
-                    />
-                    <ChangeIcon
-                        icon="https://www.khanacademy.org/favicon.ico"
-                        title="Khan Academy"
-                    />
-                </div>
-                <div className="sidePanelCloakingInputMain">
-                    <input
-                        ref={title}
-                        onChange={(e) => setLocalTitle(e.target.value)}
-                        autoComplete="off"
-                        value={localTitle || ""}
-                        className="sidePanelCloakingInput"
-                        placeholder="Title"
-                    />
-                    <input
-                        ref={icon}
-                        onChange={(e) => setLocalIcon(e.target.value)}
-                        autoComplete="off"
-                        value={localIcon || ""}
-                        className="sidePanelCloakingInput"
-                        placeholder="Favicon URL"
-                    />
-                </div>
-            </>
-        );
-    };
-
-=======
->>>>>>> 2e66843 (Git broken)
     const ThemesComponent = () => {
         return (
             <div className="sidePanelThemes">
@@ -2459,8 +2351,6 @@ function Home() {
                             </div>
                         </Tooltip>)
                     }
-<<<<<<< HEAD
-=======
                     <div className="shareIcon" onClick={() => null}>
                         <Tooltip title="Share QR to Page">
                             <QrCodeScannerIcon
@@ -2469,7 +2359,6 @@ function Home() {
                             />
                         </Tooltip>
                     </div>
->>>>>>> 2e66843 (Git broken)
                     <div className="favoriteIcon" onClick={toggleFavorite}>
                         {JSON.parse(localFavorites).filter(
                             (item: any) => item.url == currentURL
@@ -2510,11 +2399,7 @@ function Home() {
                     </div>
                     <div
                         className="controlsButton"
-<<<<<<< HEAD
-                        onClick={() => null}
-=======
                         onClick={() => setShowContextMenu(!showContextMenu)}
->>>>>>> 2e66843 (Git broken)
                     >
                         <MoreVertIcon style={{ height: "0.95em", width: "0.95em", fontSize: "1.25rem" }}></MoreVertIcon>
                     </div>
@@ -2576,10 +2461,6 @@ function Home() {
                             {{
                                 history: <HistoryComponent />,
                                 themes: <ThemesComponent />,
-<<<<<<< HEAD
-                                cloaking: <CloakingComponent />,
-=======
->>>>>>> 2e66843 (Git broken)
                                 customStyle: <CustomStyleComponent />,
                                 settings: <SettingsComponent />,
                                 favorites: <FavoritesComponent />,
@@ -2591,10 +2472,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
             {showContextMenu? (<ContextMenu hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
->>>>>>> 2e66843 (Git broken)
         </>
     );
 }

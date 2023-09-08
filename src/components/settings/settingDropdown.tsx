@@ -23,11 +23,7 @@ class SettingsSectionDropdown extends React.Component {
 
     render() {
         const title = this.props["title"] || "Setting Name";
-<<<<<<< HEAD
-        const subtitle = this.props["subtitle"] || "Setting Subtitle";
-=======
         const subtitle = this.props["subtitle"] || "";
->>>>>>> 2e66843 (Git broken)
         let active = this.props["active"] || false;
         const children = Children.toArray(this.props["children"]) || [];
         const updateFunc = this.props["onChange"] || (() => null);

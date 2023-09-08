@@ -241,11 +241,7 @@ body, * {
     font-size: 81.25% !important;
     line-height: 154% !important;
     -webkit-appearance: none;
-<<<<<<< HEAD
-    background-color: rgba(0,0,0,0.3);
-=======
     background-color: rgba(127, 127, 127, 0.1) !important;
->>>>>>> 2e66843 (Git broken)
     background: url('/ui/arrow_down.svg') calc(100% - 8px) center no-repeat;
     background-size: 10px;
     border: none;
@@ -260,8 +256,6 @@ body, * {
     padding-inline-end: calc(8px + 13px);
     padding-inline-start: 8px;
     padding-top: 6px;
-<<<<<<< HEAD
-=======
 }
 
 .settings-app-section-setting-input {
@@ -326,5 +320,4 @@ body, * {
 .settings-app-section-setting-icons .sidePanelCloakingPreset {
     display: inline-flex !important;
     cursor: pointer !important;
->>>>>>> 2e66843 (Git broken)
 }
