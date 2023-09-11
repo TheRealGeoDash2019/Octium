@@ -3,6 +3,7 @@ import { BareClient } from "@tomphttp/bare-client";
 import { bareServerURL } from "../../consts";
 import Head from "../../components/head";
 import { useLocalAppearance } from "../../settings";
+import Editor from "@monaco-editor/react";
 
 function ViewSource() {
     const [localAppearance, setLocalAppearance] = useLocalAppearance();
@@ -28,6 +29,8 @@ function ViewSource() {
 
                         var code = await site.text();
 
+                        
+                        /*
                         code =
                             "<ol class='lines'>" +
                             code
@@ -46,7 +49,7 @@ function ViewSource() {
                                             )
                                 )
                                 .join("") +
-                            "</ol>";
+                            "</ol>"; */
 
                         setSource(code);
                     }
@@ -62,10 +65,21 @@ function ViewSource() {
     return (
         <>
             <Head defaultTitle="View Source" />
-            <div
-                className="sourceCode"
-                dangerouslySetInnerHTML={{ __html: source }}
-            ></div>
+            <Editor
+                value={source}
+                options={{
+                    wordWrap: "off",
+                    roundedSelection: true,
+                    minimap: { enabled: false },
+                    tabSize: 4,
+                    quickSuggestions: false,
+                    readOnly: true
+                }}
+                loading="Downloading..."
+                height="100%"
+                defaultLanguage="HTML"
+                theme="vs-dark"
+            />
         </>
     );
 }
