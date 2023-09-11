@@ -2472,6 +2472,7 @@ function Home() {
                     </div>
                 </div>
             </div>
+            { // @ts-ignore }
             {showContextMenu? (<ContextMenu hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
         </>
     );
