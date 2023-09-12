@@ -4,6 +4,7 @@ import { bareServerURL } from "../../consts";
 import Head from "../../components/head";
 import { useLocalAppearance } from "../../settings";
 import Editor from "@monaco-editor/react";
+import "../../style/viewsource.css";
 
 function ViewSource() {
     const [localAppearance, setLocalAppearance] = useLocalAppearance();
@@ -73,11 +74,13 @@ function ViewSource() {
                     minimap: { enabled: false },
                     tabSize: 4,
                     quickSuggestions: false,
-                    readOnly: true
+                    readOnly: true,
+                    fontFamily: "monospace"
                 }}
                 loading="Downloading..."
                 height="100%"
-                defaultLanguage="HTML"
+                defaultLanguage="html"
+                language="html"
                 theme="vs-dark"
             />
         </>

@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import pluginRewriteAll from "vite-plugin-rewrite-all";
 import { createBareServer } from "@tomphttp/bare-server-node";
-import { ViteMinifyPlugin } from "vite-plugin-minify";
+import { ViteMinifyPlugin } from "vite-plugin-minify"
 
 export default defineConfig({
     build: {

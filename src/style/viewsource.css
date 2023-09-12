@@ -1,0 +1,7 @@
+body, * {
+    font-family: monospace !important;
+}
+
+#root {
+    height: 100vh;
+}
