@@ -1,7 +1,8 @@
 import { jsNamespace } from "../../../consts";
 import ContextMenuButton from "../contextMenuButton";
+import ContextMenuSeparator from "../contextMenuSeparator";
 
-function Options({ hideFn }) {
+function Options({ hideFn, exposeFn }) {
     const closeMenuFunction = () => {
         if (hideFn) {
             hideFn();
@@ -12,8 +13,14 @@ function Options({ hideFn }) {
         return (window[jsNamespace].navigate(_), _);
     }
 
+    const toggleDevtools = exposeFn.toggleDevtools;
+
     return (
         <>
+            <ContextMenuButton displayLabel="Extensions" onClick={() => {openUrl("octium://extensions"),closeMenuFunction();}} />
+            <ContextMenuSeparator />
+            <ContextMenuButton displayLabel="Developer tools" onClick={() => {toggleDevtools(),closeMenuFunction();}} />
+            <ContextMenuSeparator />
             <ContextMenuButton displayLabel="Settings" onClick={() => {openUrl("octium://settings"),closeMenuFunction();}} />
         </>
     )

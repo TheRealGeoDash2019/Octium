@@ -12,6 +12,7 @@ var InternalHome = React.lazy(() => import("./internal/home"));
 var InternalBlank = React.lazy(() => import("./internal/blank"));
 var InternalSettings = React.lazy(() => import("./internal/settings"));
 var InternalViewSource = React.lazy(() => import("./internal/viewsource"));
+var InternalExtensions = React.lazy(() => import("./internal/extensions"));
 var InternalURLS = React.lazy(() => import("./internal/internal-urls"));
 var Error = React.lazy(() => import("./error"));
 
@@ -37,10 +38,19 @@ function App() {
                     }
                 />
                 <Route
-                    path="/internal/settings*"
+                    path="/internal/settings/*"
                     element={
                         <Suspense fallback={<></>}>
                             <InternalSettings />
+                        </Suspense>
+                    }
+                />
+                
+                <Route
+                    path="/internal/extensions/*"
+                    element={
+                        <Suspense fallback={<></>}>
+                            <InternalExtensions />
                         </Suspense>
                     }
                 />

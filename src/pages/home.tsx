@@ -38,6 +38,7 @@ import Editor from "@monaco-editor/react";
 // @ts-ignore
 import mime from "mime-types";
 import ServerLogoIcon from "../components/custom-icons/logo.js";
+import ExtensionIcon from '@mui/icons-material/Extension';
 import ContextMenu from "../components/contexts/contextMenu.js";
 
 interface SearchSuggestion {
@@ -2380,13 +2381,12 @@ function Home() {
                     </div>
                 </div>
                 <div className="controls">
-                    <div
+                    <div 
                         className="controlsButton"
-                        onClick={() => toggleDevtools()}
+                        onClick={() => null}
                     >
-                        <CodeIcon
-                            fontSize="small"
-                            style={{ height: "0.95em", width: "0.95em" }}
+                        <ExtensionIcon
+                            style={{ height: "0.95em", width: "0.95em", fontSize: "1.25rem" }}
                         />
                     </div>
                     <div
@@ -2473,7 +2473,7 @@ function Home() {
                 </div>
             </div>
             { /* @ts-ignore */ }
-            {showContextMenu? (<ContextMenu hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
+            {showContextMenu? (<ContextMenu exposeFn={{toggleDevtools}} hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
         </>
     );
 }

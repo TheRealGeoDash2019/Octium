@@ -23,6 +23,6 @@
     "lang": "en-US",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#030303",
-    "theme_color": "#09283e"
+    "background_color": "#151515",
+    "theme_color": "#135328"
 }

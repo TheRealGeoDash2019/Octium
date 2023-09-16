@@ -1,0 +1,333 @@
+body, * {
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+}
+
+.extensions-navbar-left, .extensions-navbar-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    min-width: 160px;
+    max-width: 160px;
+}
+
+.extensions-navbar, .extensions-navbar-container, .extensions-navbar-toolbar {
+    height: 56px !important;
+    min-height: 56px !important;
+}
+
+.extensions-navbar-toolbar {
+    justify-content: space-between;
+}
+
+.extensions-navbar-title {
+    font-weight: 500 !important;
+    font-size: 170% !important;
+    flex: 1;
+    letter-spacing: -1px !important;
+    line-height: normal !important;
+    margin-inline-start: 6px;
+    padding-inline-end: 12px;
+    white-space: normal;
+    color: var(--primary);
+    user-select: none;
+}
+
+.extensions-navbar-search {
+    position: relative;
+    max-width: calc(100% - 0.5rem);
+}
+
+.extensionsSearchIcon {
+    color: var(--background);
+    height: calc(100% / 1.5);
+    position: absolute;
+    top: 7.3375px;
+    left: 7.3375px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-circle);
+    aspect-ratio: 1 / 1;
+}
+
+.mainSearch {
+    width: 675px;
+    height: 38px;
+}
+
+.extensions-navbar-logo {
+    margin-right: 12px;
+}
+
+.extensions-navbar-logo path {
+    color: var(--primary) !important;
+}
+
+.extensions-app-drawer {
+    height: 100%;
+    margin-top: 56px;
+    background: var(--primary);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.extensions-app-container {
+    margin-left: 250px !important;
+    max-width: calc(100vw - 500px);
+    margin-right: 250px !important;
+}
+
+.extensions-app-section-title h2 {
+    color: var(--background);
+    font-size: 108%;
+    font-weight: 400;
+    letter-spacing: .25px;
+    margin-bottom: 12px;
+    margin-top: 21px;
+    outline: 0;
+    padding-bottom: 4px;
+    padding-top: 8px;
+}
+
+.extensions-app-drawer .MuiDrawer-paper {
+    height: calc(100% - 56px);
+    width: 250px;
+    margin-top: 56px;
+    background: transparent;
+    border-right: 0px transparent !important;
+}
+
+.extensions-app-drawer-list {
+    height: calc(100% - 56px);
+}
+
+.extensions-app-drawer-tab {
+    border-top-right-radius: 100px !important;
+    border-bottom-right-radius: 100px !important;
+    padding-left: 23px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+}
+
+.extensions-app-drawer-tab.extended {
+    height: auto !important;
+    max-height: 120px !important;
+}
+
+.extensions-app-drawer-tab[active] {
+    background-color: var(--background) !important;
+    color: var(--primary) !important;
+}
+
+.extensions-app-drawer-tab[active] .extensions-app-drawer-tab-label span {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.extensions-app-drawer-tab[active] .extensions-app-drawer-tab-icon path {
+    fill: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+.extensions-app-drawer-tab-icon-container {
+    min-width: 0px !important;
+}
+
+.extensions-app-drawer-tab-icon > path {
+    fill: var(--background) !important;
+    color: var(--background) !important;
+}
+
+.extensions-app-drawer-tab-icon {
+    margin-right: 20px !important;
+    min-width: 0px !important;
+}
+
+.extensions-app-drawer-tab-label span {
+    font-size: 14px !important;
+    line-height: 14px !important;
+    color: var(--background) !important;
+}
+
+.extensions-app-drawer-divider {
+    border-bottom: 0.1px solid var(--background);
+    border-top: 0px solid transparent;
+    border-right: 20px solid transparent;
+    border-left: 0px solid transparent;
+}
+
+.extensions-app-section {
+    min-width: 550px !important;
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    height: inherit !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    width: calc(100% * 0.96) !important;
+}
+
+.extensions-app-section-setting {
+    padding: 0 20px;
+    background: var(--background);
+    color: var(--primary);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
+}
+
+.extensions-app-section-setting-label {
+    flex: 1;
+    flex-basis: 1e-9px;
+    margin-inline-end: 20px!important;
+    padding: 12px 0;
+    font-size: 81.25%;
+    line-height: 154%;
+}
+
+.extensions-app-section-setting-title {
+    color: var(--text);
+}
+
+.extensions-app-section-setting-subtitle {
+    color: var(--text);
+    opacity: 0.6;
+}
+
+.extensions-app-section-setting-select {
+    background: var(--secondary);
+    color: var(--text);
+}
+
+.setting-clickable {
+    cursor: pointer;
+}
+
+.first-subsetting {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top: none !important;
+}
+
+.last-subsetting {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.extensions-app-section-setting-icon {
+    opacity: 0.6;
+}
+
+.extensions-app-section-setting-header-icons {
+    margin-right: 12px;
+    margin-left: 4px;
+}
+
+.extensions-app-section-setting-header {
+    font-size: 153.85%;
+    font-weight: 400;
+    margin-bottom: auto;
+    margin-top: auto;
+    padding: 12px 0;
+}
+
+.extensions-app-section-setting-select {
+    max-width: 200px;
+    width: 200px;
+    color: var(--text) !important;
+    font-size: 81.25% !important;
+    line-height: 154% !important;
+    -webkit-appearance: none;
+    background-color: rgba(127, 127, 127, 0.1) !important;
+    background: url('/ui/arrow_down.svg') calc(100% - 8px) center no-repeat;
+    background-size: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    max-width: 100%;
+    outline: 0;
+    padding-bottom: 6px;
+    padding-inline-end: calc(8px + 13px);
+    padding-inline-start: 8px;
+    padding-top: 6px;
+}
+
+.extensions-app-section-setting-input {
+    max-width: 200px;
+    width: 200px;
+    color: var(--text) !important;
+    font-size: 81.25% !important;
+    line-height: 154% !important;
+    -webkit-appearance: none;
+    background-color: rgba(127, 127, 127, 0.1) !important;
+    border: none;
+    border-radius: 4px;
+    cursor: text;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    max-width: 100%;
+    outline: 0;
+    padding-bottom: 6px;
+    padding-inline-end: calc(8px + 13px);
+    padding-inline-start: 8px;
+    padding-top: 6px;
+}
+
+.extensions-app-section-setting-input-extended {
+    max-width: 300px;
+    width: 300px;
+    color: var(--text) !important;
+    font-size: 81.25% !important;
+    line-height: 154% !important;
+    -webkit-appearance: none;
+    background-color: rgba(127, 127, 127, 0.1) !important;
+    border: none;
+    border-radius: 4px;
+    cursor: text;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    max-width: 100%;
+    outline: 0;
+    padding-bottom: 6px;
+    padding-inline-end: calc(8px + 13px);
+    padding-inline-start: 8px;
+    padding-top: 6px;
+}
+
+.extensions-app-section-setting-input-extended::placeholder {
+    opacity: 0.5 !important;
+    color: var(--text) !important;
+}
+
+.extensions-app-section-setting-input::placeholder {
+    opacity: 0.5 !important;
+    color: var(--text) !important;
+}
+
+.extensions-app-section-setting-select option {
+    color: var(--text) !important;
+    background: var(--background) !important;
+}
+
+.extensions-app-section-setting-icons .sidePanelCloakingPreset {
+    display: inline-flex !important;
+    cursor: pointer !important;
+}
+
+.extensions-devmode-label {
+    font-size: 81.25%;
+    opacity: 0.7;
+}

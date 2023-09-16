@@ -820,3 +820,8 @@ body::-webkit-scrollbar-thumb {
     cursor: default;
     opacity: 0.8;
 }
+
+.contextMenuSeparator hr {
+    border: rgba(200, 200, 200, 0.2) solid 0.5px !important;
+    margin: 0.2em;
+}
