@@ -23,10 +23,10 @@ if (loc.href && webstoreRegex.test(loc.href)) {
     document.head.appendChild(createScript({
         src: new URL("/uv/workers/cws.sw.js", window.location.origin).href,
         onload: function() {
-            console.log(`[CWS for ${jsNamespace}] Ready`)
+            console.log(`[CWS Patches] Ready`)
         },
         onerror: function() {
-            console.error(`[CWS for ${jsNamespace}]`, new Error(`Failed to Load Chrome Web Store implementation`))
+            console.error(`[CWS Patches]`, new Error(`Failed to Load Chrome Web Store implementation`))
         }
     }))
 }
