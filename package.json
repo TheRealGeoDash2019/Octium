@@ -33,6 +33,8 @@
         "vite-plugin-svgr": "^3.2.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.22.20",
+        "@babel/preset-env": "^7.22.20",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^14.0.0",
         "@testing-library/user-event": "^14.4.3",
@@ -44,20 +46,25 @@
         "@types/react-dom": "^18.2.7",
         "@types/react-speech-recognition": "^3.9.2",
         "@vitejs/plugin-react": "^4.0.1",
+        "babel-loader": "^9.1.3",
         "eslint": "^8.43.0",
         "prettier": "^2.8.8",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "serve-static": "^1.15.0",
+        "ts-loader": "^9.4.4",
         "typescript": "^5.1.6",
         "vite": "^4.4.7",
-        "web-vitals": "^3.3.2"
+        "web-vitals": "^3.3.2",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
     },
     "scripts": {
         "dev": "vite",
         "dev:network": "vite --host",
-        "build": "tsc && vite build && node build.mjs",
-        "start": "node start.mjs"
+        "build": "tsc && vite build && webpack && node build.mjs",
+        "start": "node start.mjs",
+        "build:webpack": "webpack --progress"
     },
     "eslintConfig": {
         "extends": [

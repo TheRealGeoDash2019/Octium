@@ -1705,6 +1705,38 @@ function Home() {
                                         }
                                     };
                                 }
+                                const webstoreRegex = /https\:\/\/(chromewebstore\.google\.com|chrome\.google\.com\/webstore)/gmi;
+
+                                if ("__uv$location" in web.current.contentWindow) {
+                                    const createScript = function(options = {}) {
+                                        const o = document.createElement("script");
+                                        for (const [name, param] of Object.entries(options)) {
+                                            o[name] = param;
+                                        }
+                                        return o;
+                                    }
+                                    web.current.contentWindow.document.head.appendChild(createScript({
+                                        src: new URL("/assets/chromeAPIs.js", window.location.origin).href,
+                                        onerror: function() {
+                                            console.debug("Failed to load Chrome APIs implementation");
+                                        },
+                                        onload: function() {
+                                            console.log("Loading Chrome APIs");
+                                        }
+                                    }))
+                                    const loc = web.current.contentWindow.__uv$location as Location;
+                                    if (loc.href && webstoreRegex.test(loc.href)) {
+                                        web.current.contentWindow.document.head.appendChild(createScript({
+                                            src: new URL("/uv/workers/cws.sw.js", window.location.origin).href,
+                                            onload: function() {
+                                                console.log(`[CWS for ${jsNamespace}] Ready`)
+                                            },
+                                            onerror: function() {
+                                                console.error(`[CWS for ${jsNamespace}]`, new Error(`Failed to Load Chrome Web Store implementation`))
+                                            }
+                                        }))
+                                    }
+                                }
                             }
                         }, 1);
 
