@@ -78,6 +78,7 @@ export default {
     PlatformOs,
     RequestUpdateCheckStatus,
     id: undefined,
+    lastError: null,
     sendMessage,
     connect
 }

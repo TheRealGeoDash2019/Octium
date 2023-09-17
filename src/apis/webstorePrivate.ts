@@ -46,6 +46,8 @@ interface InstallManifest3Details {
     manifest: string
 }
 
+const pendingCompletionInstalls = new Map();
+
 function generateError(funcName: string, params: string, reason: string = "No matching signature.") {
     return new TypeError(`Error in invocation of webstorePrivate.${funcName}(${params}): ${reason}`)
 }
@@ -58,7 +60,7 @@ function isInIncognitoMode(callback: Function) {
     return (callback(false),null);
 }
 
-function getExtensionStatus(id: string, manifest: string | null | undefined, callback: Function) {
+function getExtensionStatus(id: string, manifest: string | undefined, callback: Function) {
     console.log("ID:",id);
     console.log("Manifest:",manifest);
     if (!id || !callback || !(typeof callback === "function")) {
@@ -78,6 +80,7 @@ function beginInstallWithManifest3(details: InstallManifest3Details, callback: F
     if (!details || !callback || !(typeof callback === "function")) {
         throw generateError("beginInstallWithManifest3", "object details, optional function callback");
     }
+    pendingCompletionInstalls.set(details.id, details);
     const userInput = confirm(`Chrome Web Store wants to Install:\n${details.localizedName}\nPress "OK" to proceed, otherwise press "Cancel"`);
     if (userInput === true) return (callback(""),null);
     else return (callback(Result.USER_CANCELLED),null);
@@ -90,6 +93,20 @@ function getReferrerChain(callback: Function) {
     return (callback("EgIIAA=="),null);
 }
 
+function completeInstall(expectedId: string, callback: Function | undefined) {
+    if (!pendingCompletionInstalls.has(expectedId)) {
+        console.error(`Unchecked runtime.lastError: ${expectedId} does not match a previous call to beginInstallWithManifest3`);
+    } else {
+        // Browser would install the Extension and return something?
+        pendingCompletionInstalls.delete(expectedId);
+        if (callback && typeof callback === "function") {
+            return callback(Result.SUCCESS);
+        } else {
+            return Result.SUCCESS;
+        }
+    }
+}
+
 export default {
     ExtensionInstallStatus,
     Result,
@@ -98,5 +115,6 @@ export default {
     getExtensionStatus,
     getStoreLogin,
     beginInstallWithManifest3,
-    getReferrerChain
+    getReferrerChain,
+    completeInstall
 }
