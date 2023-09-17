@@ -1,4 +1,5 @@
 import webstorePrivate from "./webstorePrivate";
+import management from "./management";
 
 const webstoreRegex = /https\:\/\/(chromewebstore\.google\.com|chrome\.google\.com\/webstore)/gmi;
 const urlTester = /http(s?):\/\//gmi;
@@ -7,6 +8,12 @@ const idTester = /^[a-z]{32}$/gmi;
 const webstoreDefault = Object.defineProperties({}, {
     webstorePrivate: {
         value: webstorePrivate,
+        writable: false,
+        enumerable: false,
+        configurable: false
+    },
+    management: {
+        value: management,
         writable: false,
         enumerable: false,
         configurable: false

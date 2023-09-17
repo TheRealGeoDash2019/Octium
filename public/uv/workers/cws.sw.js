@@ -1,12 +1,6 @@
-Object.defineProperty(self, "chrome", {
-    get: function() {
-        return __capi$getModules(window.__uv$location);
-    },
-    set: function() {
-        return null;
-    },
-    writable: false,
-    configurable: false,
-    enumerable: false
-});
-console.log("Attempted to override window.chrome");
+try {
+    window.chrome = window.__capi$getModules(window.__uv$location.href);
+    console.log("Attempted to override window.chrome");
+} catch(err) {
+    console.error(err)
+}

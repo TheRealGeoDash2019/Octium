@@ -64,7 +64,9 @@
         "dev:network": "vite --host",
         "build": "tsc && vite build && webpack && node build.mjs",
         "start": "node start.mjs",
-        "build:webpack": "webpack --progress"
+        "build:webpack": "webpack --progress",
+        "start:build": "tsc && vite build && webpack && node build.mjs && node start.mjs",
+        "start:build:webpack": "webpack && node build.mjs && node start.mjs"
     },
     "eslintConfig": {
         "extends": [

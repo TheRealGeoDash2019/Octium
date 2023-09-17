@@ -1715,7 +1715,7 @@ function Home() {
                                         }
                                         return o;
                                     }
-                                    web.current.contentWindow.document.head.appendChild(createScript({
+                                    /* web.current.contentWindow.document.head.appendChild(createScript({
                                         src: new URL("/assets/chromeAPIs.js", window.location.origin).href,
                                         onerror: function() {
                                             console.debug("Failed to load Chrome APIs implementation");
@@ -1735,7 +1735,7 @@ function Home() {
                                                 console.error(`[CWS for ${jsNamespace}]`, new Error(`Failed to Load Chrome Web Store implementation`))
                                             }
                                         }))
-                                    }
+                                    } */
                                 }
                             }
                         }, 1);
