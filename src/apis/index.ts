@@ -1,7 +1,7 @@
 import webstorePrivate from "./webstorePrivate";
 import management from "./management";
 import app from "./app";
-import runtime from "./runtime";
+import runtimeWeb from "./runtime_web";
 import csi from "./csi";
 
 const webstoreRegex = /https\:\/\/(chromewebstore\.google\.com|chrome\.google\.com\/webstore)/gmi;
@@ -22,7 +22,7 @@ const webstoreDefault = Object.defineProperties({}, {
         configurable: false
     },
     runtime: {
-        value: runtime,
+        value: runtimeWeb,
         writable: false,
         enumerable: false,
         configurable: false
