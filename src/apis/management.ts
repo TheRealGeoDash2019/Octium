@@ -29,35 +29,50 @@ enum LaunchType {
     OPEN_FULL_SCREEN = "OPEN_FULL_SCREEN"
 }
 
-interface ExtensionManifestIcon {
-    size: number | string;
+interface IconInfo {
+    size: number;
     url: string;
 }
 
-interface ExtensionItem {
+interface ExtensionInfo {
+    appLaunchUrl?: string;
+    availableLaunchTypes?: LaunchType[];
     description: string;
+    disabledReason?: ExtensionDisabledReason;
     enabled: boolean;
-    homepageUrl: string;
+    homepageUrl?: string;
     hostPermissions: string[];
-    icons: ExtensionManifestIcon[];
+    icons?: IconInfo[];
     id: string;
     installType: ExtensionInstallType;
     isApp: boolean;
+    launchType?: LaunchType;
     mayDisable: boolean;
+    mayEnable?: boolean;
     name: string;
     offlineEnabled: boolean;
     optionsUrl: string;
     permissions: string[];
     shortName: string;
     type: ExtensionType;
-    updateUrl: string;
+    updateUrl?: string;
     version: string;
+    versionName?: string;
+}
+
+interface UninstallOptions {
+    showConfirmDialog?: boolean;
 }
 
 function generateError(funcName: string, params: string, reason: string = "No matching signature.") {
     return new TypeError(`Error in invocation of management.${funcName}(${params}): ${reason}`)
 }
 
+/**
+ * Gets All Extensions regardless of Enabled or Disabled
+ * @param callback              Function
+ * @returns                     ExtensionInfo[]
+ */
 function getAll(callback: Function) {
     if (!callback || !(typeof callback === "function")) {
         throw generateError("getAll", "function callback");
@@ -72,8 +87,12 @@ export default {
     ExtensionType,
     LaunchType,
     getAll,
+    // (info: ExtensionInfo) => void
     onDisabled: EventEmitter(),
+    // (info: ExtensionInfo) => void
     onEnabled: EventEmitter(),
+    // (info: ExtensionInfo) => void
     onInstalled: EventEmitter(),
+    // (id: string) => void
     onUninstalled: EventEmitter()
 }
