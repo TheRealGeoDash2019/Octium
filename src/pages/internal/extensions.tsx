@@ -171,7 +171,7 @@ function Extensions() {
                                 </ListItemButton>
                             </ListItem>
                             <hr className="extensions-app-drawer-divider"></hr>
-                            <ListItem key="Discover more extensions and themes on the Chrome Web Store" disablePadding onClick={() => { setUrl(`https://chrome.google.com/webstore/category/extensions?utm_source=ext_sidebar&hl=${navigator.language}`) }}>
+                            <ListItem key="Discover more extensions and themes on the Chrome Web Store" disablePadding onClick={() => { setUrl(`https://chromewebstore.google.com/category/extensions?utm_source=ext_sidebar&hl=${navigator.language}`) }}>
                                 <ListItemButton className="extensions-app-drawer-tab extended">
                                     <ListItemIcon className="extensions-app-drawer-tab-icon-container">
                                         <ServerLogoIcon className="extensions-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></ServerLogoIcon>

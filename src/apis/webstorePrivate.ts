@@ -48,6 +48,10 @@ interface InstallManifest3Details {
 
 const pendingCompletionInstalls = new Map();
 
+function getJSNamespace() {
+    return Object.keys(window.top).filter(e => (isNaN(parseInt(e)))).filter(e => !Object.keys(window).includes(e)).find(e => (window.top[e] && window.top[e + "Storage"]));
+}
+
 function generateError(funcName: string, params: string, reason: string = "No matching signature.") {
     return new TypeError(`Error in invocation of webstorePrivate.${funcName}(${params}): ${reason}`)
 }
@@ -81,9 +85,13 @@ function beginInstallWithManifest3(details: InstallManifest3Details, callback: F
         throw generateError("beginInstallWithManifest3", "object details, optional function callback");
     }
     pendingCompletionInstalls.set(details.id, details);
-    const userInput = confirm(`Chrome Web Store wants to Install:\n${details.localizedName}\nPress "OK" to proceed, otherwise press "Cancel"`);
-    if (userInput === true) return (callback(""),null);
-    else return (callback(Result.USER_CANCELLED),null);
+    window.top[getJSNamespace()].setupInstallPrompt(details.localizedName, details.manifest, details.iconUrl, function({ value: userInput }) {
+        if (userInput === true) {
+            return (callback(""),null);
+        } else {
+            return (callback(Result.USER_CANCELLED),null);
+        }
+    }, true);
 }
 
 function getReferrerChain(callback: Function) {

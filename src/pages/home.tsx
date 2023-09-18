@@ -22,6 +22,7 @@ import { BareClient } from "@tomphttp/bare-client";
 import clsx from "clsx";
 import { bareServerURL, internalNamespace, jsNamespace, exposedInternalUrls } from "../consts";
 import { Obfuscated } from "../components/obfuscate";
+import InstallPrompt from "../components/installPrompt";
 import Head from "../components/head";
 import {
     useLocalAppearance,
@@ -97,6 +98,13 @@ function Home() {
     const [loaded, setLoaded] = React.useState(true);
     const [checking, setChecking] = React.useState(false);
     const [showContextMenu, setShowContextMenu] = React.useState(false);
+    const [activeInstallPrompt, setActiveInstallPrompt] = React.useState(false);
+    const [installPromptDetails, setInstallPromptDetails] = React.useState({
+        name: null,
+        manifest: null,
+        icon: null,
+        callback: null
+    })
     const defaultExtensions = [
         {
             name: "Dark Reader",
@@ -2106,6 +2114,19 @@ function Home() {
         setCurrentPanelOption(index);
     };
 
+    const setupInstallPrompt = (name: string, manifest: string | object, icon: string | object, callback: Function | undefined, active: boolean) => {
+        const handleCallback = function(...data) {
+            setActiveInstallPrompt(false);
+            setInstallPromptDetails({ name: null, manifest: null, icon: null, callback: null });
+            if (callback && (typeof callback === "function")) {
+                return callback.call(callback, ...data);
+            }
+        }
+        setInstallPromptDetails({ name, manifest, icon, callback: handleCallback });
+        setActiveInstallPrompt(active);
+        return { active };
+    }
+
     React.useEffect(() => {
         // @ts-ignore
         if (panelOptions[currentPanelOption].panel) {
@@ -2174,6 +2195,7 @@ function Home() {
                     }));
                 }
             },
+            setupInstallPrompt: setupInstallPrompt
         };
     }
 
@@ -2243,6 +2265,10 @@ function Home() {
         // @ts-ignore
         window[jsNamespace].isInternalURL = isInternalURL;
     }, [isInternalURL])
+
+    React.useEffect(() => {
+        window[jsNamespace].setupInstallPrompt = setupInstallPrompt;
+    }, [setupInstallPrompt])
 
     const resizePanelMouseDown = (e: any) => {
         // @ts-ignore
@@ -2415,7 +2441,7 @@ function Home() {
                 <div className="controls">
                     <div 
                         className="controlsButton"
-                        onClick={() => null}
+                        onClick={() => searchURL("octium://extensions")}
                     >
                         <ExtensionIcon
                             style={{ height: "0.95em", width: "0.95em", fontSize: "1.25rem" }}
@@ -2506,6 +2532,7 @@ function Home() {
             </div>
             { /* @ts-ignore */ }
             {showContextMenu? (<ContextMenu exposeFn={{toggleDevtools}} hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
+            {activeInstallPrompt? (<InstallPrompt name={installPromptDetails.name} manifest={installPromptDetails.manifest} iconUrl={installPromptDetails?.icon} onChange={installPromptDetails?.callback || (() => null)}></InstallPrompt>) : (<></>)}
         </>
     );
 }
