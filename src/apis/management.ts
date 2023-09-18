@@ -1,3 +1,5 @@
+import EventEmitter from "./util/Event";
+
 enum ExtensionInstallType {
     ADMIN = "admin",
     DEVELOPMENT = "development",
@@ -69,5 +71,9 @@ export default {
     ExtensionInstallType,
     ExtensionType,
     LaunchType,
-    getAll
+    getAll,
+    onDisabled: EventEmitter(),
+    onEnabled: EventEmitter(),
+    onInstalled: EventEmitter(),
+    onUninstalled: EventEmitter()
 }
