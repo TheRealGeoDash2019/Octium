@@ -6,7 +6,11 @@ import 'regenerator-runtime/runtime';
 import App from "./pages/app.js";
 import localForage from "localforage";
 
-localForage.config({
+const root = ReactDOM.createRoot(
+    document.getElementById("root") as HTMLElement
+);
+
+window[`${jsNamespace}Storage`] = localForage.createInstance({
     driver: localForage.INDEXEDDB,
     name: jsNamespace,
     version: 1,
@@ -14,11 +18,13 @@ localForage.config({
     description: `Storage Namespace for ${jsNamespace}`
 });
 
-const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
-);
-
-window[`${jsNamespace}Storage`] = localForage;
+window[`${jsNamespace}ExtensionStorage`] = localForage.createInstance({
+    driver: localForage.INDEXEDDB,
+    name: jsNamespace,
+    version: 1,
+    storeName: 'extensionFiles',
+    description: `Storage for ${jsNamespace} Extensions`
+});
 
 root.render(
     <BrowserRouter basename="">
