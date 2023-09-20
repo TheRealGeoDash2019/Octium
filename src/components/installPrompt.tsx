@@ -43,6 +43,10 @@ function InstallPrompt({ name, manifest, iconUrl, onChange }) {
         "webRequest": "Modify, Intercept or Block Web Requests"
     }
 
+    function hasPermissions() {
+        return (!!permissions.length || !!hostPermissions.length);
+    }
+
     function getAllPermissionStrings() {
         const permissionStrings = permissions.map(e => {
             if (permissionValues[e]) {
@@ -110,7 +114,7 @@ function InstallPrompt({ name, manifest, iconUrl, onChange }) {
                     </div>
                 </div>
                 <div className="prompt-permissions">
-                    <span className="permission-list-header">It can:</span>
+                    {hasPermissions()? <span className="permission-list-header">It can:</span> : <></>}
                     <ul className="permission-items">
                         { getAllPermissionStrings() }
                     </ul>
