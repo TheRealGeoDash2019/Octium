@@ -1,8 +1,13 @@
+const {
+  sentryWebpackPlugin
+} = require("@sentry/webpack-plugin");
+
 const path = require('path');
 
 module.exports = {
   mode: "production",
   entry: './src/apis/index.ts',
+
   module: {
     rules: [
       {
@@ -27,11 +32,21 @@ module.exports = {
       }
     ],
   },
+
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.mjs', '.cjs'],
   },
+
   output: {
     filename: 'chromeAPIs.js',
     path: path.resolve(__dirname, 'build/assets'),
   },
+
+  devtool: "source-map",
+
+  plugins: [sentryWebpackPlugin({
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    org: "therealgeodash",
+    project: "octium"
+  })]
 };
