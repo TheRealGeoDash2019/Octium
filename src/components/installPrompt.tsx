@@ -31,7 +31,7 @@ function InstallPrompt({ name, manifest, iconUrl, onChange }) {
         "scripting": "Execute Scripts on Sites",
         "contextMenus": "Add or Remove Items in the Context Menu",
         "alarms": "Create or Modify Alarms",
-        "bookmarks": "Create, Modify or Remove Bookmarks",
+        "bookmarks": "Read and change your bookmarks",
         "browsingData": "Read or Modify your Browsing Data",
         "downloads": "Create, Modify, or Search your Downloads",
         "gcm": "Send or Receive Google Cloud Messages",
@@ -40,11 +40,13 @@ function InstallPrompt({ name, manifest, iconUrl, onChange }) {
         "idle": "Monitor when the machine goes idle",
         "management": "Manage the installed extensions/apps",
         "runtime": "Access various runtime tools",
-        "webRequest": "Modify, Intercept or Block Web Requests"
+        "webRequest": "Modify, Intercept or Block Web Requests",
+        "serial": "Access your serial devices",
     }
 
     function hasPermissions() {
-        return (!!permissions.length || !!hostPermissions.length);
+        const permissionsStringsAvailable = Object.keys(permissions).filter(e => Object.keys(permissionValues).includes(e));
+        return (!!permissionsStringsAvailable.length || !!hostPermissions.length);
     }
 
     function getAllPermissionStrings() {

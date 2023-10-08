@@ -16,6 +16,7 @@
         "@mui/material": "^5.14.7",
         "@mui/styled-engine": "^5.13.2",
         "@tomphttp/bare-client": "^2.0.0",
+        "browserfs": "^1.4.3",
         "chalk": "^5.2.0",
         "clsx": "^1.2.1",
         "color-parse": "^1.4.3",
