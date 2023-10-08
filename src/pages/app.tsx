@@ -32,7 +32,7 @@ Sentry.init({
     ],
     tracesSampleRate: 0.5,
     replaysSessionSampleRate: 0.4,
-    replaysOnErrorSampleRate: 0.5,
+    replaysOnErrorSampleRate: 1.0,
 });
 
 var Home = React.lazy(() => import("./home"));
