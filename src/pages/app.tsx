@@ -16,7 +16,7 @@ import { jsNamespace, internalNamespace } from "../consts";
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-    dsn: "https://d7cb333eaf24b13edef8a093098b40e5@o1228900.ingest.sentry.io/4505672215232512",
+    dsn: "https://e9f7e81e4be690c00b4c5bc61b705414@o1228900.ingest.sentry.io/4506012351266816",
     integrations: [
       new Sentry.BrowserTracing({
         tracePropagationTargets: ["localhost", "localhost:8000", "octium.azul.one"],
