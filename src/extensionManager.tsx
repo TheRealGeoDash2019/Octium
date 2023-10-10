@@ -1,9 +1,56 @@
-import BrowserFS, { Errors, BFSRequire } from "browserfs";
+import BrowserFS, { Errors, BFSRequire, FileSystem } from "browserfs";
+import { FileFlag } from "browserfs/dist/node/core/file_flag";
 import { internalNamespace, jsNamespace } from "./consts";
+
+class CRXManager {
+    #apiHost = "https://crx.azul.one";
+
+    getUrls(extId: string) {
+        return ({
+            downloadCRX: [this.#apiHost,":id/download".replace(":id", extId)].join("/"),
+            downloadZIP: [this.#apiHost,":id/download-as-zip".replace(":id", extId)].join("/"),
+            manifest: [this.#apiHost,":id/manifest".replace(":id", extId)].join("/")
+        });
+    }
+
+    getFileFlag(type: string = "r") {
+        return new FileFlag(type);
+    }
+
+    async downloadZIP(extId: string) {
+        return await fetch(this.getUrls(extId).downloadZIP).then(e => e.arrayBuffer());
+    }
+
+    getZIPFS(extId: string) {
+        return new Promise(async (res, rej) => {
+            const zipAB = await this.downloadZIP(extId);
+            const zipBuffer = BFSRequire("buffer").Buffer.from(zipAB);
+            BrowserFS.getFileSystem({
+                fs: "ZipFS",
+                options: {
+                    name: `${extId}.zip`,
+                    zipData: zipBuffer
+                }
+            }, function(err, zip) {
+                if (err) rej(err);
+                res(zip);
+            })
+        })
+    }
+
+    async downloadCRX(extId: string) {
+        return await fetch(this.getUrls(extId).downloadCRX).then(e => e.arrayBuffer());
+    }
+
+    async getManifest(extId: string) {
+        return await fetch(this.getUrls(extId).manifest).then(e => e.json());
+    }
+}
 
 class ExtensionManager {
     #fsBackend = null;
     #nodeGlobal = {};
+    #crxBackend = new CRXManager();
     constructor() {
         BrowserFS.install(this.#nodeGlobal);
         BrowserFS.configure({
@@ -29,6 +76,10 @@ class ExtensionManager {
 
     getFSBackend() {
         return this.#fsBackend;
+    }
+
+    getCRXBackend() {
+        return this.#crxBackend;
     }
 
     getBrowserFS() {
