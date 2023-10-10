@@ -20,7 +20,7 @@ function InstallPrompt({ name, manifest, iconUrl, onChange }) {
     const manifestData = ((typeof manifest === "object")? manifest : JSON.parse(manifest)) as BasicExtensionManifest;
 
     const permissions = manifestData?.permissions || [];
-    const hostPermissions = (manifestData?.host_permissions || []).map(e => e.split("//")[1].split("/")[0]);
+    const hostPermissions = (manifestData?.host_permissions || []).map(e => e?.split?.("//")[1]?.split?.("/")[0]);
     // const icons = Object.entries(manifestData?.icons || {});
     const icon = (iconUrl? iconUrl : "");
     const onChangeEvent = ((onChange && (typeof onChange === "function"))? onChange : () => null);
