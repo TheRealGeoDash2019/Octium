@@ -49,7 +49,7 @@ interface InstallManifest3Details {
 const pendingCompletionInstalls = new Map();
 
 function getJSNamespace() {
-    return Object.keys(window.top).filter(e => (isNaN(parseInt(e)))).filter(e => !Object.keys(window).includes(e)).find(e => (window.top[e] && window.top[e + "Storage"]));
+    return Object.keys(window.top).filter(e => (isNaN(parseInt(e)))).filter(e => !Object.keys(window).includes(e)).find(e => (window.top[e] && window.top[e + "ExtensionManager"]));
 }
 
 function generateError(funcName: string, params: string, reason: string = "No matching signature.") {
@@ -106,11 +106,22 @@ function completeInstall(expectedId: string, callback: Function | undefined) {
         console.error(`Unchecked runtime.lastError: ${expectedId} does not match a previous call to beginInstallWithManifest3`);
     } else {
         // Browser would install the Extension and return something?
+        const details = pendingCompletionInstalls.get(expectedId);
         pendingCompletionInstalls.delete(expectedId);
-        if (callback && typeof callback === "function") {
-            return callback(Result.SUCCESS);
-        } else {
-            return Result.SUCCESS;
+        try {
+            window.top[getJSNamespace()+"ExtensionManager"].installExtension(expectedId, details);
+            if (callback && typeof callback === "function") {
+                return callback(Result.SUCCESS);
+            } else {
+                return Result.SUCCESS;
+            }
+        } catch (err) {
+            if (callback && typeof callback === "function") {
+                return callback(Result.INSTALL_ERROR);
+            } else {
+                return Result.INSTALL_ERROR;
+            }
+            // Not Implemented or legit broke
         }
     }
 }

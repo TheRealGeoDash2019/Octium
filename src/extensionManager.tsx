@@ -104,6 +104,11 @@ class ExtensionManager {
             res(null);
         });
     }
+
+    installExtension(extId: string, details: object) {
+        console.log(extId);
+        console.log(details);
+    }
 }
 
 export default ExtensionManager;
