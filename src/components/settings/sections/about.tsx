@@ -15,7 +15,8 @@ import ServerLogoIcon from "../../custom-icons/logo";
 function About({ }) {
 
     const isViteDevActive = () => {
-        return ("__vite_plugin_react_runtime_loaded__" in globalThis);
+        const devModeOverride = (!!localStorage.getItem("NOT_SO_SECRET_DEVMODE_FEATURE") && localStorage.getItem("NOT_SO_SECRET_DEVMODE_FEATURE") === [jsNamespace,(new Date).getFullYear().toString()].join("|"));
+        return devModeOverride || ("__vite_plugin_react_runtime_loaded__" in globalThis);
     }
 
     const getVersionInfo = () => {

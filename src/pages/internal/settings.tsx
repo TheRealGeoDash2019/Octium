@@ -82,6 +82,25 @@ function InternalSettings() {
         //    return window.parent[jsNamespace].navigate(e.target.value);
         // }
     };
+    let initialValue = 0;
+    let triggerValue = 15;
+    let lastTimeoutClick = 0;
+    const devModeTrigger = function() {
+        clearTimeout(lastTimeoutClick);
+        initialValue += 1;
+        if (initialValue >= triggerValue) {
+            localStorage.setItem("NOT_SO_SECRET_DEVMODE_FEATURE", [jsNamespace,(new Date).getFullYear().toString()].join("|"))
+            try {
+                window.top[jsNamespace].alert("Developer Mode", "You are now a Developer. Refresh to apply...");
+            } catch {
+                // Probably not on the Browser?
+            }
+        }
+        // @ts-ignore
+        lastTimeoutClick = setTimeout(() => {
+            initialValue = 0;
+        }, 250)
+    }
 
     const setUrlBar = (pathname = "blank") => {
         // Warning: very buggy?
@@ -161,7 +180,7 @@ function InternalSettings() {
                                 </ListItemButton>
                             </ListItem>
                             <hr className="settings-app-drawer-divider"></hr>
-                            <ListItem key="About" disablePadding onClick={() => { setActiveTab("help"); }}>
+                            <ListItem key="About" disablePadding onClick={() => { (setActiveTab("help"), devModeTrigger()); }}>
                                 <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "help")? { "active": "true" } : {}) }>
                                     <ListItemIcon className="settings-app-drawer-tab-icon-container">
                                         <ServerLogoIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></ServerLogoIcon>

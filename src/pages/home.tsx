@@ -20,9 +20,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Tooltip from "@mui/material/Tooltip";
 import { BareClient } from "@tomphttp/bare-client";
 import clsx from "clsx";
-import { bareServerURL, internalNamespace, jsNamespace, exposedInternalUrls } from "../consts";
+import { bareServerURL, internalNamespace, jsNamespace, exposedInternalUrls, extensionsDisabled } from "../consts";
 import { Obfuscated } from "../components/obfuscate";
 import InstallPrompt from "../components/installPrompt";
+import AlertPrompt from "../components/alertPrompt";
 import Head from "../components/head";
 import {
     useLocalAppearance,
@@ -57,6 +58,7 @@ function Home() {
     const [loading, setLoading] = React.useState(false);
     const internalURLS = exposedInternalUrls;
     const [canGoBack, setCanGoBack] = React.useState(false);
+    
     const [canGoForward, setCanGoForward] = React.useState(false);
     const [suggestions, setSuggestions] = React.useState([] as SearchSuggestion[]);
     const [searchEngine, setSearchEngine] = React.useState(
@@ -72,10 +74,6 @@ function Home() {
         {
             name: "History",
             component: "history",
-        },
-        {
-            name: "Themes",
-            component: "themes",
         },
         {
             name: "Custom Style",
@@ -99,10 +97,16 @@ function Home() {
     const [checking, setChecking] = React.useState(false);
     const [showContextMenu, setShowContextMenu] = React.useState(false);
     const [activeInstallPrompt, setActiveInstallPrompt] = React.useState(false);
+    const [activeAlertPrompt, setActiveAlertPrompt] = React.useState(false);
     const [installPromptDetails, setInstallPromptDetails] = React.useState({
         name: null,
         manifest: null,
         icon: null,
+        callback: null
+    })
+    const [alertPromptDetails, setAlertPromptDetails] = React.useState({
+        title: null,
+        description: null,
         callback: null
     })
     const defaultExtensions = [
@@ -745,343 +749,6 @@ function Home() {
                     defaultLanguage="css"
                     theme="vs-dark"
                 />
-            </div>
-        );
-    };
-
-    const ThemesComponent = () => {
-        return (
-            <div className="sidePanelThemes">
-                <ThemeOption theme="default" noPreview={true}>
-                    <div className="sidePanelThemePreview sidePanelThemePreviewDefault">
-                        <AutoAwesomeIcon fontSize="large" />
-                    </div>
-                    <Obfuscated>Default</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="dark">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Dark</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="light">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Light</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="legacy">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Legacy</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="ruby">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Ruby</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="frog">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Frog</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="space">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Space</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="molten">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Molten</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="swamp">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Swamp</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="squid">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Squid</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="lemon">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Lemon</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="lime">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Lime</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="nord">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Nord</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="violet">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Violet</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="online">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Online</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="dune">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Dune</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="dracula">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Dracula</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="ice">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Ice</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="chocolate">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Chocolate</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="campfire">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Campfire</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="elixir">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Elixir</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="happiness">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Happiness</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="robot">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Robot</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="butter">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Butter</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="sun">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Sun</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="plum">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Plum</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="sky">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Sky</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="matrix">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Matrix</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="quantum">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Quantum</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="manjaro">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Manjaro</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="leafy">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Leafy</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="blackpink">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Blackpink</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="retro">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Retro</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="honey">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Honey</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="pod">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Pod</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="flamingo">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Flamingo</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="magma">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Magma</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="hacker">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Hacker</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="jungle">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Jungle</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="bubblegum">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Gum</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="flower">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Flower</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="nebelung">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Nebelung</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="sylvie">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Sylvie</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="riftriot">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Riftriot</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="adv3">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Adv3</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="cat">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Cat</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="koaku">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Koaku</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="spritz">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Spritz</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="retron">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Retron</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="airtag">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Airtag</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="catppuccin-latte">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Latte</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="catppuccin-frappe">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Frappe</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="catppuccin-macchiato">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Macchiato</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="catppuccin-mocha">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Mocha</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="cobalt2">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Cobalt2</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="rose-pine">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Rosé Pine</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="tokyo-night">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Tokyo</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="classic">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Classic</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="simple">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Simple</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="corn">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Corn</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="alice">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Alice</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="kahoot">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Kahoot</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="booklet">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Booklet</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="chrome">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Chrome</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="vs-code">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>VS Code</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="tiktok">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Tiktok</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="discord">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Discord</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="pride">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Pride</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="shadow">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Shadow</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="eaglenet">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Eaglenet</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="mercury-workshop">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>MW</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="echo">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>3kh0</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="fracital">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Fracital</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="nebula">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Nebula</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="noctura">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Noctura</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="atom">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Atom</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="immortal">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Immortal</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="shadow2">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Shadow</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="flowos">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Flow OS</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="baja-blast">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Baja Blast</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="tsunami">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Tsunami</Obfuscated>
-                </ThemeOption>
-                <ThemeOption theme="metallic">
-                    <div className="sidePanelThemePreview"></div>
-                    <Obfuscated>Metallic</Obfuscated>
-                </ThemeOption>
             </div>
         );
     };
@@ -2127,6 +1794,16 @@ function Home() {
         return { active };
     }
 
+    const customAlert = (title: string, description: string) => {
+        return new Promise((res, rej) => {
+            const callbackPatch = (value) => {
+                return (setActiveAlertPrompt(false), res(value));
+            }
+            setAlertPromptDetails({ title, description, callback: callbackPatch });
+            setActiveAlertPrompt(true);
+        });
+    }
+
     React.useEffect(() => {
         // @ts-ignore
         if (panelOptions[currentPanelOption].panel) {
@@ -2184,6 +1861,7 @@ function Home() {
             canGoForward: canGoForward,
             useSuggestions: useSuggestions,
             searchEngine: searchEngine,
+            alert: customAlert,
             getSuggestions: getSuggestions,
             sidePanelBodyData: sidePanelBodyData,
             mime: mime,
@@ -2265,6 +1943,10 @@ function Home() {
         // @ts-ignore
         window[jsNamespace].isInternalURL = isInternalURL;
     }, [isInternalURL])
+
+    React.useEffect(() => {
+        window[jsNamespace].alert = customAlert;
+    }, [customAlert])
 
     React.useEffect(() => {
         window[jsNamespace].setupInstallPrompt = setupInstallPrompt;
@@ -2440,7 +2122,7 @@ function Home() {
                 </div>
                 <div className="controls">
                     <div 
-                        className="controlsButton"
+                        className={"controlsButton" + `${extensionsDisabled? " hidden" : ""}`}
                         onClick={() => searchURL("octium://extensions")}
                     >
                         <ExtensionIcon
@@ -2518,7 +2200,6 @@ function Home() {
                         <div>
                             {{
                                 history: <HistoryComponent />,
-                                themes: <ThemesComponent />,
                                 customStyle: <CustomStyleComponent />,
                                 settings: <SettingsComponent />,
                                 favorites: <FavoritesComponent />,
@@ -2533,6 +2214,7 @@ function Home() {
             { /* @ts-ignore */ }
             {showContextMenu? (<ContextMenu exposeFn={{toggleDevtools}} hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
             {activeInstallPrompt? (<InstallPrompt name={installPromptDetails.name} manifest={installPromptDetails.manifest} iconUrl={installPromptDetails?.icon} onChange={installPromptDetails?.callback || (() => null)}></InstallPrompt>) : (<></>)}
+            {activeAlertPrompt? (<AlertPrompt title={alertPromptDetails.title} description={alertPromptDetails.description} onConfirm={alertPromptDetails?.callback || (() => null)}></AlertPrompt>) : (<></>)}
         </>
     );
 }

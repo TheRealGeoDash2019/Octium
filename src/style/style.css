@@ -825,3 +825,8 @@ body::-webkit-scrollbar-thumb {
     border: rgba(200, 200, 200, 0.2) solid 0.5px !important;
     margin: 0.2em;
 }
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}

@@ -1,4 +1,4 @@
-import { jsNamespace, internalNamespace } from "../../../consts";
+import { jsNamespace, internalNamespace, extensionsDisabled } from "../../../consts";
 import ContextMenuButton from "../contextMenuButton";
 import ContextMenuSeparator from "../contextMenuSeparator";
 
@@ -17,8 +17,8 @@ function Options({ hideFn, exposeFn }) {
 
     return (
         <>
-            <ContextMenuButton displayLabel="Extensions" onClick={() => {openUrl(`${internalNamespace}://extensions`),closeMenuFunction();}} />
-            <ContextMenuSeparator />
+            {extensionsDisabled? (<></>) : (<ContextMenuButton displayLabel="Extensions" onClick={() => {openUrl(`${internalNamespace}://extensions`),closeMenuFunction();}} />) }
+            {extensionsDisabled? (<></>) : (<ContextMenuSeparator />)}
             <ContextMenuButton displayLabel="Developer tools" onClick={() => {toggleDevtools(),closeMenuFunction();}} />
             <ContextMenuSeparator />
             <ContextMenuButton displayLabel="Settings" onClick={() => {openUrl(`${internalNamespace}://settings`),closeMenuFunction();}} />

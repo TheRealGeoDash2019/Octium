@@ -70,3 +70,15 @@
 .button-action:nth-child(2) {
     margin-left: 4px;
 }
+
+.prompt-title {
+    font-size: 16px;
+    color: var(--text) !important;
+    user-select: text !important;
+}
+
+.prompt-description {
+    font-size: 13px;
+    color: var(--text) !important;
+    user-select: text !important;
+}
