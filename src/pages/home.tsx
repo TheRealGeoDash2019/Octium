@@ -69,7 +69,7 @@ function Home() {
     const [currentURL, setCurrentURL] = React.useState(homeURL);
     const defaultPanelOptions = [
         {
-            name: "Favorites",
+            name: "Bookmarks",
             component: "favorites",
         },
         {
@@ -83,10 +83,6 @@ function Home() {
         {
             name: "Extensions",
             component: "extensions",
-        },
-        {
-            name: "Settings",
-            component: "settings",
         },
     ];
     const [currentPanelOption, setCurrentPanelOption] = React.useState(0);
@@ -671,64 +667,6 @@ function Home() {
             </div>
         );
     }
-
-    const SettingsComponent = () => {
-        const setHomeURL = (value: string) => {
-            localStorage.setItem("homeURL", value || `${internalNamespace}://home`);
-            homeURL = value || `${internalNamespace}://home`;
-        };
-
-        const setSearchEngineURL = (value: string) => {
-            localStorage.setItem(
-                "engine",
-                value || "https://www.google.com/search?q=%s"
-            );
-            setSearchEngine(value || "https://www.google.com/search?q=%s");
-        };
-
-        return (
-            <>
-                <div>
-                    <div className="settingsTitle">
-                        <Obfuscated>Home Page</Obfuscated>
-                    </div>
-                    <input
-                        onChange={(e) => setHomeURL(e.target.value)}
-                        defaultValue={homeURL || ""}
-                        autoComplete="off"
-                        className="sidePanelCloakingInput"
-                    ></input>
-                    <div className="settingsTitle settingsTitleSecondary">
-                        <Obfuscated>Search Engine</Obfuscated>
-                    </div>
-                    <input
-                        onChange={(e) => setSearchEngineURL(e.target.value)}
-                        defaultValue={searchEngine || ""}
-                        placeholder="URL with %s in place of query"
-                        autoComplete="off"
-                        className="sidePanelCloakingInput"
-                    ></input>
-                    <div className="settingsTitle settingsTitleSecondary">
-                        <Obfuscated>Border Radius</Obfuscated>
-                    </div>
-                    <div className="settingsOptions">
-                        <BorderRadiusOption name="default">
-                            <Obfuscated>Default</Obfuscated>
-                        </BorderRadiusOption>
-                        <BorderRadiusOption name="round">
-                            <Obfuscated>Round</Obfuscated>
-                        </BorderRadiusOption>
-                        <BorderRadiusOption name="fancy">
-                            <Obfuscated>Fancy</Obfuscated>
-                        </BorderRadiusOption>
-                        <BorderRadiusOption name="square">
-                            <Obfuscated>Square</Obfuscated>
-                        </BorderRadiusOption>
-                    </div>
-                </div>
-            </>
-        );
-    };
 
     const CustomStyleComponent = () => {
         const [localCustomStyle, setLocalCustomStyle] = useLocalCustomStyle();
