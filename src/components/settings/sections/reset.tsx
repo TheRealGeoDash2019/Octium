@@ -31,7 +31,7 @@ function Reset({ }) {
                 cookieStore.getAll().then(c => cookieStore.delete(c?.name));
                 navigator.serviceWorker.getRegistrations().then(r => r.forEach(e => e.unregister()))
                 window.top[jsNamespace].alert("Browser Reset", "All Settings are reset...").then(ack => {
-                    location.reload();
+                    window.top.location.reload();
                 })
             } else {
                 // Ignore
