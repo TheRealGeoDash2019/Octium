@@ -20,6 +20,7 @@ import React from "react";
 import "../../style/home.css";
 import "../../style/settings.css";
 import ServerLogoIcon from "../../components/custom-icons/logo";
+import RestoreIcon from '@mui/icons-material/Restore';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import SettingsSections from "../../components/settings/sections";
 
@@ -126,6 +127,9 @@ function InternalSettings() {
             case "search":
                 setUrlBar("settings/search");
                 return (<SettingsSections.Search></SettingsSections.Search>);
+            case "reset":
+                setUrlBar("settings/reset");
+                return (<SettingsSections.Reset></SettingsSections.Reset>);
             default:
                 return (<></>)
         }
@@ -177,6 +181,15 @@ function InternalSettings() {
                                         <SearchIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></SearchIcon>
                                     </ListItemIcon>
                                     <ListItemText className="settings-app-drawer-tab-label" primary="Search Engine" />
+                                </ListItemButton>
+                            </ListItem>
+                            <hr className="settings-app-drawer-divider"></hr>
+                            <ListItem key="Reset settings" disablePadding onClick={() => { setActiveTab("reset"); }}>
+                                <ListItemButton className="settings-app-drawer-tab" {...((activeTab === "reset")? { "active": "true" } : {}) }>
+                                    <ListItemIcon className="settings-app-drawer-tab-icon-container">
+                                        <RestoreIcon className="settings-app-drawer-tab-icon" sx={{ width: "20px", height: "20px" }}></RestoreIcon>
+                                    </ListItemIcon>
+                                    <ListItemText className="settings-app-drawer-tab-label" primary={`Reset settings`} />
                                 </ListItemButton>
                             </ListItem>
                             <hr className="settings-app-drawer-divider"></hr>

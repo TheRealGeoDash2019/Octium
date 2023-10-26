@@ -24,6 +24,7 @@ import { bareServerURL, internalNamespace, jsNamespace, exposedInternalUrls, ext
 import { Obfuscated } from "../components/obfuscate";
 import InstallPrompt from "../components/installPrompt";
 import AlertPrompt from "../components/alertPrompt";
+import ConfirmPrompt from "../components/confirmPrompt";
 import Head from "../components/head";
 import {
     useLocalAppearance,
@@ -98,6 +99,7 @@ function Home() {
     const [showContextMenu, setShowContextMenu] = React.useState(false);
     const [activeInstallPrompt, setActiveInstallPrompt] = React.useState(false);
     const [activeAlertPrompt, setActiveAlertPrompt] = React.useState(false);
+    const [activeConfirmPrompt, setActiveConfirmPrompt] = React.useState(false);
     const [installPromptDetails, setInstallPromptDetails] = React.useState({
         name: null,
         manifest: null,
@@ -105,6 +107,11 @@ function Home() {
         callback: null
     })
     const [alertPromptDetails, setAlertPromptDetails] = React.useState({
+        title: null,
+        description: null,
+        callback: null
+    })
+    const [confirmPromptDetails, setConfirmPromptDetails] = React.useState({
         title: null,
         description: null,
         callback: null
@@ -1804,6 +1811,16 @@ function Home() {
         });
     }
 
+    const customConfirm = (title: string, description: string) => {
+        return new Promise((res, rej) => {
+            const callbackPatch = (value) => {
+                return (setActiveConfirmPrompt(false), res(value));
+            }
+            setConfirmPromptDetails({ title, description, callback: callbackPatch });
+            setActiveConfirmPrompt(true);
+        });
+    }
+
     React.useEffect(() => {
         // @ts-ignore
         if (panelOptions[currentPanelOption].panel) {
@@ -1862,6 +1879,7 @@ function Home() {
             useSuggestions: useSuggestions,
             searchEngine: searchEngine,
             alert: customAlert,
+            confirm: customConfirm,
             getSuggestions: getSuggestions,
             sidePanelBodyData: sidePanelBodyData,
             mime: mime,
@@ -1947,6 +1965,10 @@ function Home() {
     React.useEffect(() => {
         window[jsNamespace].alert = customAlert;
     }, [customAlert])
+
+    React.useEffect(() => {
+        window[jsNamespace].confirm = customConfirm;
+    }, [customConfirm])
 
     React.useEffect(() => {
         window[jsNamespace].setupInstallPrompt = setupInstallPrompt;
@@ -2215,6 +2237,7 @@ function Home() {
             {showContextMenu? (<ContextMenu exposeFn={{toggleDevtools}} hideFn={setShowContextMenu} position={{ right: "0px", top: "2.5rem" }} menuType="Options"></ContextMenu>) : ""}
             {activeInstallPrompt? (<InstallPrompt name={installPromptDetails.name} manifest={installPromptDetails.manifest} iconUrl={installPromptDetails?.icon} onChange={installPromptDetails?.callback || (() => null)}></InstallPrompt>) : (<></>)}
             {activeAlertPrompt? (<AlertPrompt title={alertPromptDetails.title} description={alertPromptDetails.description} onConfirm={alertPromptDetails?.callback || (() => null)}></AlertPrompt>) : (<></>)}
+            {activeConfirmPrompt? (<ConfirmPrompt title={confirmPromptDetails.title} description={confirmPromptDetails.description} onConfirm={confirmPromptDetails?.callback || (() => null)}></ConfirmPrompt>) : (<></>)}
         </>
     );
 }

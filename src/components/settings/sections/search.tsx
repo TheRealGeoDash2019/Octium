@@ -14,12 +14,20 @@ function Search({ }) {
         localStorage.getItem("engine") || "https://www.google.com/search?q=%s"
     );
 
+    const globalSetSearchEngine = function(value: string) {
+        if (value) {
+            localStorage.setItem("engine", value);
+        } else {
+            localStorage.removeItem("engine");
+        }
+    }
+
     const defaultEngine = searchEngine || "https://www.google.com/search?q=%s";
 
     const searchChange = function(event) {
         const value = event.target.value;
         try {
-            setSearchEngine(value || "https://www.google.com/search?q=%s");
+            globalSetSearchEngine(value || "https://www.google.com/search?q=%s");
         } catch {
             // Probably Errored...
         }

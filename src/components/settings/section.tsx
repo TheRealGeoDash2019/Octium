@@ -13,7 +13,8 @@ const replacementTitle = {
     "help": `About ${jsNamespace}`,
     "appearance": "Appearance",
     "cloaking": "Cloaking",
-    "search": "Search Engine"
+    "search": "Search Engine",
+    "reset": "Reset settings"
 }
 
 class SettingsSection extends React.Component {

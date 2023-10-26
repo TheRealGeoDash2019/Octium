@@ -2,37 +2,31 @@ import { jsNamespace, internalNamespace, exposedInternalUrls } from "../../const
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, ComponentProps, Children } from "react";
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from "@mui/material/FormControl";
-import { parseColor, getAppropriateColor } from "../utils/color";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { alpha, styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
 
-interface SectionInputProps {
+interface SectionActionProps {
     title?: string;
     subtitle?: string;
-    initialValue?: string;
-    onChange?: Function;
     className?: string;
-    placeholder?: string;
-    extended?: boolean;
+    onClick?: Function;
 }
 
-class SettingsSectionInput extends React.Component {
-    constructor(props: SectionInputProps) {
+
+class SettingsSectionAction extends React.Component {
+    constructor(props: SectionActionProps) {
         super(props);
     }
 
     render() {
         const title = this.props["title"] || "Setting Name";
         const subtitle = this.props["subtitle"] || "";
-        const initialValue = this.props["initialValue"] || "";
-        const placeholder = this.props["placeholder"] || "";
-        const updateFunc = this.props["onChange"] || (() => null);
         const className = this.props["className"] || "";
-        const isExtended = Boolean(this.props["extended"] || false)
+        const onClick = this.props["onClick"] || (() => {});
         return (
             <>
-                <div className={`settings-app-section-setting ${className}`}>
+                <div className={`settings-app-section-setting setting-clickable ${className}`} onClick={onClick}>
                     <div className="settings-app-section-setting-label">
                         <div className="settings-app-section-setting-title">
                             {title}
@@ -41,11 +35,14 @@ class SettingsSectionInput extends React.Component {
                             {subtitle}
                         </div>
                     </div>
-                    <input className={`settings-app-section-setting-input${isExtended? "-extended" : ""}`} onChange={updateFunc} defaultValue={initialValue} placeholder={placeholder}></input>
+                    { /* @ts-ignore */ }
+                    <div className="settings-app-section-setting-icons">
+                        <ArrowRightIcon className="settings-app-section-setting-icon"></ArrowRightIcon>
+                    </div>
                 </div>
             </>
         )
     }
 }
 
-export default SettingsSectionInput;
+export default SettingsSectionAction;
