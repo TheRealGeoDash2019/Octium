@@ -38,7 +38,7 @@ function Appearance({ }) {
         }
     }
 
-    const defaultValue = localStorage.getItem("homeURL");
+    const defaultValue = localStorage.getItem("homeURL") || "";
 
     return (
         <>
@@ -47,7 +47,7 @@ function Appearance({ }) {
                     return <option value={e[0]}>{e[1]}</option>
                 }) }
             </SettingsSectionDropdown>
-            <SettingsSectionInput title="Home Page" initialValue={defaultValue.toString()} placeholder="octium://home" onChange={homePageChange} extended={true}></SettingsSectionInput>
+            <SettingsSectionInput title="Home Page" initialValue={defaultValue} placeholder="octium://home" onChange={homePageChange} extended={true}></SettingsSectionInput>
             <SettingsSectionDropdown className="last-subsetting" title="Border Radius" active={localBorderRadius} onChange={handleRadiusChange}>
                 { ...Object.entries(borderRadiusOptions).map(e => {
                     return <option value={e[0]}>{e[1]}</option>
