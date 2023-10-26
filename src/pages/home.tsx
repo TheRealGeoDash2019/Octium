@@ -2161,7 +2161,6 @@ function Home() {
                             {{
                                 history: <HistoryComponent />,
                                 customStyle: <CustomStyleComponent />,
-                                settings: <SettingsComponent />,
                                 favorites: <FavoritesComponent />,
                                 extensions: <ExtensionsComponent />,
                             }[panelOptions[currentPanelOption].component] || (
