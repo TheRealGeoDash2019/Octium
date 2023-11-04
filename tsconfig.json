@@ -20,6 +20,6 @@
         "noImplicitAny": false,
         "types": ["node", "vite/client"]
     },
-    "include": ["src", "./config/uv/uv.config.ts"],
+    "include": ["src", "./config/sv/sv.config.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

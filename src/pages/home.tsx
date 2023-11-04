@@ -216,7 +216,7 @@ function Home() {
                                         return "";
                                     }
 
-                                    return "<a class='sidePanelYoutubeDownloaderLink' download='" + ${jsNamespace}.web.current.contentWindow.ytInitialPlayerResponse.videoDetails.title.normalize() + "." + ${jsNamespace}.mime.extension(mime) + "' href='" + new URL(__uv$config.prefix + __uv$config.encodeUrl(item.url), window.location).toString() + "'>" + mime + " - " + quality + "</a>"
+                                    return "<a class='sidePanelYoutubeDownloaderLink' download='" + ${jsNamespace}.web.current.contentWindow.ytInitialPlayerResponse.videoDetails.title.normalize() + "." + ${jsNamespace}.mime.extension(mime) + "' href='" + new URL(__sv$config.prefix + __sv$config.encodeUrl(item.url), window.location).toString() + "'>" + mime + " - " + quality + "</a>"
                                 }).filter(item => item).join("")
                                 ${jsNamespace}.setSidePanelBody('default-youtube-downloader', '<div class="sidePanelYoutubeDownloader">' + downloadLinks + '</div>')
                                 onYoutube = true
@@ -362,14 +362,14 @@ function Home() {
                 if (
                     web.current.contentWindow.location.pathname.startsWith(
                         // @ts-ignore
-                        __uv$config.prefix
+                        __sv$config.prefix
                     )
                 ) {
                     // @ts-ignore
-                    var url = __uv$config.decodeUrl(
+                    var url = __sv$config.decodeUrl(
                         web.current.contentWindow.location.pathname.split(
                             // @ts-ignore
-                            __uv$config.prefix
+                            __sv$config.prefix
                         )[1]
                     );
                 } else if (
@@ -831,14 +831,14 @@ function Home() {
             if (
                 web.current.contentWindow.location.pathname.startsWith(
                     // @ts-ignore
-                    __uv$config.prefix
+                    __sv$config.prefix
                 )
             ) {
                 // @ts-ignore
-                var url = __uv$config.decodeUrl(
+                var url = __sv$config.decodeUrl(
                     web.current.contentWindow.location.pathname.split(
                         // @ts-ignore
-                        __uv$config.prefix
+                        __sv$config.prefix
                     )[1]
                 );
             } else if (
@@ -923,14 +923,14 @@ function Home() {
                             if (
                                 web.current.contentWindow.location.pathname.startsWith(
                                     // @ts-ignore
-                                    __uv$config.prefix
+                                    __sv$config.prefix
                                 )
                             ) {
                                 // @ts-ignore
-                                var url = __uv$config.decodeUrl(
+                                var url = __sv$config.decodeUrl(
                                     web.current.contentWindow.location.pathname.split(
                                         // @ts-ignore
-                                        __uv$config.prefix
+                                        __sv$config.prefix
                                     )[1]
                                 );
                             } else if (
@@ -1163,17 +1163,17 @@ function Home() {
                                             web.current.contentWindow.navigation.currentEntry.url
                                         ).pathname.startsWith(
                                             // @ts-ignore
-                                            __uv$config.prefix
+                                            __sv$config.prefix
                                         )
                                     ) {
                                         // @ts-ignore
-                                        var url = __uv$config.decodeUrl(
+                                        var url = __sv$config.decodeUrl(
                                             new URL(
                                                 // @ts-ignore
                                                 web.current.contentWindow.navigation.currentEntry.url
                                             ).pathname.split(
                                                 // @ts-ignore
-                                                __uv$config.prefix
+                                                __sv$config.prefix
                                             )[1]
                                         );
                                     } else if (
@@ -1327,7 +1327,7 @@ function Home() {
                                 }
                                 const webstoreRegex = /https\:\/\/(chromewebstore\.google\.com|chrome\.google\.com\/webstore)/gmi;
 
-                                if ("__uv$location" in web.current.contentWindow) {
+                                if ("__sv$location" in web.current.contentWindow) {
                                     const createScript = function(options = {}) {
                                         const o = document.createElement("script");
                                         for (const [name, param] of Object.entries(options)) {
@@ -1344,10 +1344,10 @@ function Home() {
                                             console.log("Loading Chrome APIs");
                                         }
                                     }))
-                                    const loc = web.current.contentWindow.__uv$location as Location;
+                                    const loc = web.current.contentWindow.__sv$location as Location;
                                     if (loc.href && webstoreRegex.test(loc.href)) {
                                         web.current.contentWindow.document.head.appendChild(createScript({
-                                            src: new URL("/uv/workers/cws.sw.js", window.location.origin).href,
+                                            src: new URL("/sv/workers/cws.sw.js", window.location.origin).href,
                                             onload: function() {
                                                 console.log(`[CWS for ${jsNamespace}] Ready`)
                                             },
@@ -1363,14 +1363,14 @@ function Home() {
                         if (
                             web.current.contentWindow.location.pathname.startsWith(
                                 // @ts-ignore
-                                __uv$config.prefix
+                                __sv$config.prefix
                             )
                         ) {
                             // @ts-ignore
-                            var url = __uv$config.decodeUrl(
+                            var url = __sv$config.decodeUrl(
                                 web.current.contentWindow.location.pathname.split(
                                     // @ts-ignore
-                                    __uv$config.prefix
+                                    __sv$config.prefix
                                 )[1]
                             );
 
@@ -1536,7 +1536,7 @@ function Home() {
                     // @ts-ignore
                     web.current.contentWindow.location = new URL(
                         // @ts-ignore
-                        __uv$config.prefix + __uv$config.encodeUrl(checkURL),
+                        __sv$config.prefix + __sv$config.encodeUrl(checkURL),
                         // @ts-ignore
                         window.location
                     );
@@ -1551,9 +1551,9 @@ function Home() {
                     ).toString();
                     // @ts-ignore
                     web.current.contentWindow.location = new URL(
-                        __uv$config.prefix +
+                        __sv$config.prefix +
                             // @ts-ignore
-                            __uv$config.encodeUrl(search.current.value),
+                            __sv$config.encodeUrl(search.current.value),
                         // @ts-ignore
                         window.location
                     );

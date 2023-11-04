@@ -12,7 +12,7 @@
 </p>
 
 ### Warning about using Replit, Glitch or Railway
-Due to the dependencies of this project, it will not allow Ultraviolet to install. If you plan on using this on any of the platforms, consider forking and modifying the code to bypass it.
+Due to the dependencies of this project, it will not allow Superviolet to install. If you plan on using this on any of the platforms, consider forking and modifying the code to bypass it.
 
 ## Features
 - Simple clean design
@@ -65,9 +65,9 @@ File: [/src/consts.tsx](https://github.com/TheRealGeoDash2019/Octium/blob/main/s
 
 **Bare Server**
 
-File: [/public/uv/uv.config.js](https://github.com/TheRealGeoDash2019/Octium/blob/main/public/uv/uv.config.js)
+File: [/public/sv/sv.config.js](https://github.com/TheRealGeoDash2019/Octium/blob/main/public/sv/sv.config.js)
 
-`bare: url,` - Ultraviolet bare server
+`bare: url,` - Superviolet bare server
 
 ## To Do (imported from Cobalt)
 - [ ] Reading mode extension
@@ -81,7 +81,7 @@ File: [/public/uv/uv.config.js](https://github.com/TheRealGeoDash2019/Octium/blo
 - [ ] Section to change headers sent to site on proxy (eg. user-agent)
 - [ ] Share button
 - [ ] Dashboard with widgets
-- [ ] Make Ultraviolet take less space
+- [ ] Make Superviolet take less space
 - [ ] URL option for cloaking
 - [ ] Update iframe on custom style change
 - [ ] Suggestions for home page
