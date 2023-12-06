@@ -42,6 +42,7 @@ var InternalSettings = React.lazy(() => import("./internal/settings"));
 var InternalViewSource = React.lazy(() => import("./internal/viewsource"));
 var InternalExtensions = React.lazy(() => import("./internal/extensions"));
 var InternalURLS = React.lazy(() => import("./internal/internal-urls"));
+var InternalNetworkError = React.lazy(() => import("./internal/network-error"));
 var Error = React.lazy(() => import("./error"));
 
 const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes);
@@ -75,7 +76,14 @@ function App() {
                         </Suspense>
                     }
                 />
-                
+                <Route
+                    path="/internal/network-error/*"
+                    element={
+                        <Suspense fallback={<></>}>
+                            <InternalNetworkError />
+                        </Suspense>
+                    }
+                />
                 <Route
                     path="/internal/extensions/*"
                     element={

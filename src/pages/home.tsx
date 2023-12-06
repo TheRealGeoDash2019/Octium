@@ -1759,6 +1759,28 @@ function Home() {
         });
     }
 
+    const setMiddleware = async function(handler) {
+        const workerPath = new URL(__sv$config.prefix,location.origin).href;
+        const sw = (await navigator.serviceWorker.getRegistration(workerPath))?.active;
+        if (sw && (handler instanceof Function)) {
+            sw.postMessage({ 
+                action: "clientSetMiddleware",
+                data: handler.toString()
+            })
+        }
+    }
+
+    const setInject = async function(handler) {
+        const workerPath = new URL(__sv$config.prefix,location.origin).href;
+        const sw = (await navigator.serviceWorker.getRegistration(workerPath))?.active;
+        if (sw && (handler instanceof Function)) {
+            sw.postMessage({
+                action: "clientSetInject",
+                data: handler.toString()
+            })
+        }
+    }
+
     React.useEffect(() => {
         // @ts-ignore
         if (panelOptions[currentPanelOption].panel) {
@@ -1829,7 +1851,11 @@ function Home() {
                     }));
                 }
             },
-            setupInstallPrompt: setupInstallPrompt
+            setupInstallPrompt: setupInstallPrompt,
+            worker: {
+                setMiddleware: setMiddleware,
+                setInject: setInject
+            }
         };
     }
 
