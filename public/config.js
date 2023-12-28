@@ -140,7 +140,7 @@ importScripts("./localforage.min.js");
             if (servers.length > 0) {
                 return servers;
             } else {
-                return "/bare";
+                return "/bare/";
             }
         }
     }
