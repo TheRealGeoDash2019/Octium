@@ -17,15 +17,14 @@ importScripts("/config.js");
         try {
             const blockedDomains = await self.internalConfig.blockedDomains.listDomains(true);
             const adDomains = await self.internalConfig.adBlockState.getAdDomains(true);
+            const adBlockEnabled = await self.internalConfig.adBlockState.getState(true);
             const url = new URL(req.url);
             if (blockedDomains.includes(url.host)) {
                 return getRedirectToErrorCode(20, url.href);
             } else if (adDomains.includes(url.host)) {
                 return new Response(null, {
-                    status: 499,
+                    status: 404,
                     headers: new Headers({
-                        "Host": "about:blank",
-                        "Origin": "about:blank",
                         "X-Blocked": "?1"
                     })
                 })

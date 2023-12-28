@@ -70,7 +70,11 @@ importScripts("./localforage.min.js");
             }
         }
 
-        getState() {
+        async getState(update = false) {
+            if (update === true) {
+                const adBlockState = (await x.getItem("adBlockState"));
+                this.#state = adBlockState;
+            }
             return this.#state;
         }
 

@@ -87,7 +87,11 @@ export default async function() {
             }
         }
 
-        getState() {
+        async getState(update = false) {
+            if (update === true) {
+                const adBlockState = (await x.getItem("adBlockState")) as boolean;
+                this.#state = adBlockState;
+            }
             return this.#state;
         }
 
@@ -101,8 +105,9 @@ export default async function() {
             return x.setItem("adBlockState", false);
         }
 
-        async getAdDomains() {
-            if (this.#state === false) {
+        async getAdDomains(checkIDB = false) {
+            const result = (checkIDB? (await x.getItem("adBlockState")) : this.#state);
+            if (result === false) {
                 return [];
             } else {
                 const req = await fetch(`https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt`);
