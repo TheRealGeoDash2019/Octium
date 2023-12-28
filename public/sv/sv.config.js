@@ -10,7 +10,7 @@ self.__sv$config = {
     config: '/sv/sv.config.js',
     sw: '/sv/sv.sw.js',
     inject: function(url) {
-        return null;
+        return "";
     },
     middleware: async function(req) {
         return req;
