@@ -1,4 +1,5 @@
 importScripts("./sv/sv.sw.js");
+importScripts("./config.js");
 
 const sw = new SVServiceWorker();
 

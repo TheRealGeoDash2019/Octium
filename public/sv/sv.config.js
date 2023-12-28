@@ -9,4 +9,10 @@ self.__sv$config = {
     bundle: '/sv/sv.bundle.js',
     config: '/sv/sv.config.js',
     sw: '/sv/sv.sw.js',
+    inject: function(url) {
+        return null;
+    },
+    middleware: async function(req) {
+        return req;
+    }
 };

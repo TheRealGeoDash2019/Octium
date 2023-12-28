@@ -37,12 +37,12 @@
         "vite-plugin-svgr": "^3.2.0"
     },
     "devDependencies": {
+        "@azuleum/superviolet": "^2.0.2",
         "@babel/core": "^7.22.20",
         "@babel/preset-env": "^7.22.20",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^14.0.0",
         "@testing-library/user-event": "^14.4.3",
-        "@azuleum/superviolet": "^2.0.2",
         "@tomphttp/bare-server-node": "^2.0.1",
         "@types/mime-types": "^2.1.1",
         "@types/random-seed": "^0.3.3",
