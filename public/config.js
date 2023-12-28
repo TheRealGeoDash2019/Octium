@@ -100,9 +100,55 @@ importScripts("./localforage.min.js");
         }
     }
 
+    class BareConfigurator {
+        #servers = [];
+        constructor() {
+            this.#init();
+        }
+
+        async #init() {
+            const bareServers = (await x.getItem("bareServers"));
+            if (!(bareServers instanceof Array)) {
+                x.setItem("bareServers", []);
+            } else {
+                this.#servers = (bareServers.length > 0)? bareServers : [];
+            }
+        }
+
+        async addServer(...servers) {
+            this.#servers.push(...servers);
+            const bServers = (await x.getItem("bareServers"));
+            return x.setItem("bareServers", [...Array.from(bServers), ...servers])
+        }
+
+        async removeServer(...servers) {
+            this.#servers = this.#servers.filter(e => (![...servers].includes(e)));
+            const bServers = (await x.getItem("bareServers"));
+            return x.setItem("bareServers", Array.from(bServers).filter(e => (![...servers].includes(e))))
+        }
+
+        async getServers(update = false) {
+            if (update === true) {
+                const bareServers = (await x.getItem("bareServers"));
+                this.#servers = (bareServers.length > 0)? bareServers : [];
+            }
+            return this.#servers;
+        }
+
+        async getBareServers(update = false) {
+            const servers = await this.getServers(update);
+            if (servers.length > 0) {
+                return servers;
+            } else {
+                return "/bare";
+            }
+        }
+    }
+
     const config = Object.freeze({
         blockedDomains: new BDomainList(),
-        adBlockState: new AdBlockToggle()
+        adBlockState: new AdBlockToggle(),
+        bareServers: new BareConfigurator()
     });
 
     return self.internalConfig = config;

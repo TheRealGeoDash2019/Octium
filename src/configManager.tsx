@@ -13,9 +13,17 @@ interface AdBlockState {
     disableBlocking: Function;
 }
 
+interface BareConfig {
+    addServer: Function;
+    removeServer: Function;
+    getServers: Function;
+    getBareServers: Function;
+}
+
 interface WebConfig {
     blockedDomains: BlockedDomainList;
     adBlockState: AdBlockState;
+    bareServers: BareConfig;
 }
 
 export default async function() {
@@ -36,10 +44,8 @@ export default async function() {
         async #init() {
             const blockedDomainsResult = (await x.getItem("bDomains"));
             if (!(blockedDomainsResult instanceof Array)) {
-                console.debug("[Config] Setting up blocked domains.");
                 x.setItem("bDomains", []);
             } else {
-                console.debug("[Config] Loaded blocked domains.");
                 this.#domains = blockedDomainsResult;
             }
         }
@@ -79,10 +85,8 @@ export default async function() {
         async #init() {
             const adBlockState = (await x.getItem("adBlockState"));
             if (typeof adBlockState === "boolean") {
-                console.debug("[Config] Loaded adblock state.");
                 this.#state = adBlockState;
             } else {
-                console.debug("[Config] Setting up adblock state.");
                 x.setItem("adBlockState", false);
             }
         }
@@ -117,11 +121,55 @@ export default async function() {
         }
     }
 
+    class BareConfigurator {
+        #servers = [];
+        constructor() {
+            this.#init();
+        }
 
+        async #init() {
+            const bareServers = (await x.getItem("bareServers")) as Array<string>;
+            if (!(bareServers instanceof Array)) {
+                x.setItem("bareServers", []);
+            } else {
+                this.#servers = (bareServers.length > 0)? bareServers : [];
+            }
+        }
+
+        async addServer(...servers) {
+            this.#servers.push(...servers);
+            const bServers = (await x.getItem("bareServers")) as string[];
+            return x.setItem("bareServers", [...Array.from(bServers), ...servers])
+        }
+
+        async removeServer(...servers) {
+            this.#servers = this.#servers.filter(e => (![...servers].includes(e)));
+            const bServers = (await x.getItem("bareServers")) as string[];
+            return x.setItem("bareServers", Array.from(bServers).filter(e => (![...servers].includes(e))))
+        }
+
+        async getServers(update = false) {
+            if (update === true) {
+                const bareServers = (await x.getItem("bareServers")) as Array<string>;
+                this.#servers = (bareServers.length > 0)? bareServers : [];
+            }
+            return this.#servers;
+        }
+
+        async getBareServers(update = false) {
+            const servers = await this.getServers(update);
+            if (servers.length > 0) {
+                return servers;
+            } else {
+                return "/bare";
+            }
+        }
+    }
 
     const config: WebConfig = Object.freeze({
         blockedDomains: new BDomainList() as BlockedDomainList,
-        adBlockState: new AdBlockToggle() as AdBlockState
+        adBlockState: new AdBlockToggle() as AdBlockState,
+        bareServers: new BareConfigurator() as BareConfig
     });
 
     return config;
