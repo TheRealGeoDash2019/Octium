@@ -84,11 +84,12 @@ importScripts("./localforage.min.js");
             return x.setItem("adBlockState", false);
         }
 
-        async getAdDomains() {
-            if (this.#state === false) {
+        async getAdDomains(checkIDB = false) {
+            const result = (checkIDB? (await x.getItem("adBlockState")) : this.#state);
+            if (result === false) {
                 return [];
             } else {
-                const req = await fetch(`https://hosts.anudeep.me/mirror/adservers.txt`);
+                const req = await fetch(`https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt`);
                 const resp = await req.text();
                 return resp.split("\n").filter(e => (!e.startsWith("#"))).map(e => e.split(" ")[1]);
             }

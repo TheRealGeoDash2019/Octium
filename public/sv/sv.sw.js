@@ -16,7 +16,7 @@ importScripts("/config.js");
     self.__sv$config.middleware = async function(req) {
         try {
             const blockedDomains = await self.internalConfig.blockedDomains.listDomains(true);
-            const adDomains = await self.internalConfig.adBlockState.getAdDomains();
+            const adDomains = await self.internalConfig.adBlockState.getAdDomains(true);
             const url = new URL(req.url);
             if (blockedDomains.includes(url.host)) {
                 return getRedirectToErrorCode(20, url.href);
