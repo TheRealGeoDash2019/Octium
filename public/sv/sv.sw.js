@@ -13,6 +13,8 @@ importScripts("/config.js");
             })
         })
     };
+
+    const commonAdNames = ["ad.js", "pagead.js", "partner.ads.js"];
     self.__sv$config.middleware = async function(req) {
         try {
             const blockedDomains = await self.internalConfig.blockedDomains.listDomains(true);
@@ -21,7 +23,14 @@ importScripts("/config.js");
             const url = new URL(req.url);
             if (blockedDomains.includes(url.host)) {
                 return getRedirectToErrorCode(20, url.href);
-            } else if (adDomains.includes(url.host)) {
+            } else if (adBlockEnabled && adDomains.includes(url.host)) {
+                return new Response(null, {
+                    status: 404,
+                    headers: new Headers({
+                        "X-Blocked": "?1"
+                    })
+                })
+            } else if (adBlockEnabled && url.pathname.split("/").find(e => commonAdNames.includes(e))) {
                 return new Response(null, {
                     status: 404,
                     headers: new Headers({
