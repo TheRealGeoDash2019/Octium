@@ -1,7 +1,7 @@
 /*global Superviolet*/
 self.__sv$config = {
     prefix: '/superviolet/',
-    bare: ['https://blueprints.lhost.dev/', 'https://strainer.lhost.dev/'],
+    bare: ['https://anura.pro/bare/', 'https://blueprints.lhost.dev/', 'https://strainer.lhost.dev/'],
     encodeUrl: Superviolet.codec.xor.encode,
     decodeUrl: Superviolet.codec.xor.decode,
     handler: '/sv/sv.handler.js',
